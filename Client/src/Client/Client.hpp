@@ -1,17 +1,20 @@
 #pragma once
 
 #include "../Connection/Iconnection.hpp"
+#include "../UI/Ui.hpp"
 #include<iostream>
 
 class Client{
-    public:
+    private:
         IConnection& connection;
+        Ui& ui;
     public:
-        Client(IConnection& conn) : connection(conn) {}
+        Client(IConnection& conn, Ui& userInterface) 
+        : connection(conn) , ui(userInterface) {}
+
+        IConnection& getConnection() { return connection;}
+        Ui& getUi() {return ui;}
         
-        //  Client(Connection conn){
-        //     connection = std::make_shared<Connection>(conn);
-        //  }
          ~Client() = default;
         
 

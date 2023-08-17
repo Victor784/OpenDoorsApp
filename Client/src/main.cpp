@@ -13,13 +13,13 @@
 
 
 
-// void ClientCode() {
-//   Ui *ui = new Ui(new Panel_Initial);
+void ClientCode() {
+  Ui *ui = new Ui(new Panel_Initial, "");
 
-//   ui->run();
+  ui->run();
   
-//   delete ui;
-// }
+  delete ui;
+}
    
 
 

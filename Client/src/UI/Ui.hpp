@@ -1,6 +1,7 @@
 #pragma once
 
 #include"C:\Users\victo\Desktop\ProjectsCPP\MiniClientServer\Client\src\UI\Panel.hpp"
+#include <string>
 
 /**
  * The Ui defines the interface of interest to clients. It also maintains a
@@ -11,9 +12,10 @@ class Ui {
 
  private:
   Panel *panel_;
+  std::string cmd = "";
 
  public:
-  Ui(Panel *panel) : panel_(nullptr) {
+  Ui(Panel *panel, std::string newCmd) : panel_(nullptr) , cmd(newCmd) {
     this->TransitionTo(panel);
   }
   ~Ui() {
@@ -31,6 +33,13 @@ class Ui {
   void run() {
     this->panel_->run();
   }
-
+  std::string getCmd()
+  {
+    return cmd;
+  }
+  void setCmd(std::string newCmd)
+  {
+    cmd = newCmd;
+  }
 
 };
