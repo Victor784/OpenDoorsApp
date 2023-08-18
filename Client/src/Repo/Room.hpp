@@ -27,7 +27,7 @@ class Room
     private:
         unsigned int id;
         std::string name;
-        int level;
+        int level = 0;
         std::vector<Entrance> entrances; 
 
 };

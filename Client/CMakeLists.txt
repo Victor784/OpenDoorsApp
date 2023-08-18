@@ -18,6 +18,8 @@ add_executable(Client
     src/Repo/Entrance.cpp
     src/Repo/Room.hpp
     src/Repo/Room.cpp
+    src/Repo/Housee.hpp
+    src/Repo/House.cpp
     src/main.cpp)
 
 target_compile_features(Client PRIVATE cxx_std_20)
