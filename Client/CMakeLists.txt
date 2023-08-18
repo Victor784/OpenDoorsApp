@@ -14,6 +14,10 @@ add_executable(Client
     src/UI/Ui.hpp
     src/UI/ConcretePanels.hpp
     src/UI/ConcretePanels.cpp
+    src/Repo/Entrance.hpp
+    src/Repo/Entrance.cpp
+    src/Repo/Room.hpp
+    src/Repo/Room.cpp
     src/main.cpp)
 
 target_compile_features(Client PRIVATE cxx_std_20)

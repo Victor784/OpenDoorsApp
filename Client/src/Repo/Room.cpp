@@ -28,7 +28,7 @@ std::string Room::getName()
     return name;
 }
 
-unsigned int Room::getLevel()
+int Room::getLevel()
 {
     return level;
 }

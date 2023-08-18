@@ -1,4 +1,6 @@
+#pragma once
 #include<string>
+#include<iostream>
 
 enum class EntranceType
 {
@@ -38,6 +40,8 @@ class Entrance
         void setType(EntranceType newType);
         void setPosition(Position newPosition);
         void setStatus(Status newStatus);
+        
+        friend std::ostream& operator<<(std::ostream& os, const Entrance& en);
 
     public:
         static unsigned int idGenerator;

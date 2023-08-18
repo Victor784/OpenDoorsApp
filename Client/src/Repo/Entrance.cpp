@@ -93,3 +93,9 @@ std::string toString(Status status)
             return "";
     }
 }
+
+std::ostream& operator<<(std::ostream& os, const Entrance& en)
+{
+    os << "Id: " << en.id << " | " << "Type: "<< toString(en.type) << " | " << "Orientation: " << toString(en.position) << " | " << "Status: "<< toString(en.status); 
+    return os;
+}
