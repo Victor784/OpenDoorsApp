@@ -1,4 +1,7 @@
+#pragma  once
+
 #include"Room.hpp"
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -9,16 +12,19 @@ struct Address
     std::string streetName = "NOT SET";
     std::string city = "NOT SET";
     std::string coutry = "NOT SET";
-    // TODO '=' and '<<' operator
+
+    friend std::ostream& operator<<(std::ostream& os, const Address& adr);
 };
+
+
 
 class House
 {
     public:
         House();
-        House(Address address_val);
-        House(Address address_val, std::vector<Room> rooms_vect);
-        House(std::vector<Room> rooms_vect);
+        House(Address addresVal);
+        House(Address addresVal, std::vector<Room> roomsVect);
+        House(std::vector<Room> roomsVect);
         ~House() = default;
 
         unsigned int getId();

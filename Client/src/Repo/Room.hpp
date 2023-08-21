@@ -1,27 +1,30 @@
 #pragma once
 #include "Entrance.hpp"
+#include <ostream>
 #include <vector>
 
 class Room 
 {
     public:
         Room() = delete;
-        Room(std::string name_val, unsigned int level_val, std::vector<Entrance> entrance_vect);
-        Room(std::string name_val, unsigned int level_val);
+        Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance> entranceVect);
+        Room(std::string nameVal, unsigned int levelVal);
         ~Room() = default;
 
         unsigned int getId();
-        std::string getName();
+        std::string getName() const;
         int getLevel();
-        std::vector<Entrance> getEntrances();
+        std::vector<Entrance> getEntrances() const;
 
-        void setName(std::string name_val);
-        void setLevel(unsigned int level_val);
+        void setName(std::string nameVal);
+        void setLevel(unsigned int levelVal);
         void setEntrances(std::vector<Entrance> entranceVect);
 
         void addEntrance(Entrance newEntrance);
         void removeEntrance(unsigned int entranceId);
 
+        friend std::ostream& operator<< (std::ostream& os, const Room& room);
+        void operator=(const Room& other);
     public:
         static unsigned int roomIdGenerator;
     private:

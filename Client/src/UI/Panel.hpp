@@ -13,7 +13,7 @@ class Ui;
 class Panel {
 
  protected:
-  Ui *ui_;
+  Ui *ui;
   bool finalPanel;
 
 
@@ -21,8 +21,8 @@ class Panel {
   virtual ~Panel() {
   }
 
-  void set_ui(Ui *ui) {
-    this->ui_ = ui;
+  void setUi(Ui *uiVal) {
+    this->ui = uiVal;
   }
 
   bool  isPanelFinal()

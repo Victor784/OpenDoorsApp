@@ -3,13 +3,13 @@
 
 unsigned int Entrance::idGenerator = 0;
 
-Entrance::Entrance(EntranceType type_val , Position position_val , Status status_val)
+Entrance::Entrance(EntranceType typeVal , Position positionVal , Status statusVal)
 {
      
             id = ++idGenerator;
-            type = type_val;
-            position = position_val;
-            status = status_val;
+            type = typeVal;
+            position = positionVal;
+            status = statusVal;
         
 }
 
@@ -54,11 +54,11 @@ std::string toString(EntranceType type)
     switch (type) {
         case EntranceType::Door:
             return "Door";
-        case EntranceType::Rabatable_Door:
+        case EntranceType::RabatableDoor:
             return "Rabatable door";
         case EntranceType::Window:
             return "Window";
-        case EntranceType::Rabatable_Window:
+        case EntranceType::RabatableWindow:
             return "Rabatable window";
         default:
             return "";

@@ -5,9 +5,9 @@
 enum class EntranceType
 {
     Window,
-    Rabatable_Window,
+    RabatableWindow,
     Door,
-    Rabatable_Door
+    RabatableDoor
 };
 
 enum class Position
@@ -29,7 +29,7 @@ class Entrance
 {
     public:
         Entrance() = delete;
-        Entrance(EntranceType type_val , Position position_val , Status status_val);
+        Entrance(EntranceType typeVal , Position positionVal , Status statusVal);
         ~Entrance() = default;
 
         unsigned int getId();

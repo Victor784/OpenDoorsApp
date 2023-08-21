@@ -8,34 +8,42 @@
  * Ui.
  */
 
-class Panel_Initial : public Panel {
+class PanelInitial : public Panel {
 
  public:
   void run() override;
 
 };
 
-class Panel_CheckEntrances : public Panel {
+class PanelCheckEntrances : public Panel {
  public:
   void run() override;
 };
 
-class Panel_UpdateHouseLayout : public Panel {
+class PanelUpdateHouseLayout : public Panel {
  public:
   void run() override;
 };
 
-class Panel_CheckRooms : public Panel {
+class PanelCheckRooms : public Panel {
  public:
   void run() override;
 };
 
-class Panel_CheckAllEntrances : public Panel {
+class PanelCheckAllEntrances : public Panel {
  public:
   void run() override;
 };
 
-class Panel_test : public Panel {
+class PanelTest : public Panel {
  public:
   void run() override;
+};
+
+class PanelRoom : public Panel{
+ public:
+  PanelRoom(const Room& room);
+  void run() override;
+ public: 
+  const Room* roomPtr;
 };

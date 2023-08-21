@@ -7,23 +7,23 @@ House::House()
     id = ++houseIdGenerator;
 }
 
-House::House(Address address_val)
+House::House(Address addresVal)
 {
     id = ++houseIdGenerator;
-    addres = address_val;
+    addres = addresVal;
 }
 
-House::House(Address address_val, std::vector<Room> rooms_vect)
+House::House(Address addresVal, std::vector<Room> roomsVect)
 {
     id = ++houseIdGenerator;
-    addres = address_val;
-    rooms = rooms_vect;
+    addres = addresVal;
+    rooms = roomsVect;
 }
 
-House::House(std::vector<Room> rooms_vect)
+House::House(std::vector<Room> roomsVect)
 {
     id = ++houseIdGenerator;
-    rooms = rooms_vect;
+    rooms = roomsVect;
 }
 
 unsigned int House::getId()
@@ -38,6 +38,7 @@ Address House::getAddress()
         
 std::vector<Room> House::getRooms()
 {
+    std::cout << "here from getRooms\n";
     return rooms;
 }
 
@@ -72,4 +73,12 @@ void House::removeRoom(unsigned int roomId)
     {
         rooms.erase(rooms.begin() + position);
     }
+}
+
+std::ostream& operator<<(std::ostream& os, const Address& adr)
+{
+    os<<"Country: " << adr.coutry << " | " << "City: " << " | " << 
+    "Street Name: " << adr.streetName << " | " << "Nr. " << adr.nr 
+    << " | " << "Floor: " << adr.floor;
+    return os;
 }

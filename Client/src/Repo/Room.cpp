@@ -2,20 +2,20 @@
 
 unsigned int Room::roomIdGenerator = 0;
 
-Room::Room(std::string name_val, unsigned int level_val, std::vector<Entrance> entrance_vect)
+Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance> entranceVal)
 {
     id = ++roomIdGenerator;
-    name = name_val;
-    level = level_val;
-    entrances = entrance_vect;  
+    name = nameVal;
+    level = levelVal;
+    entrances = entranceVal;  
 }
 
-Room::Room(std::string name_val, unsigned int level_val)
+Room::Room(std::string nameVal, unsigned int levelVal)
 {
     id = ++roomIdGenerator;
-    name = name_val;
-    level = level_val;
-    std::vector<Entrance> entrances;  //TODO : ask Alex if this is needed or not
+    name = nameVal;
+    level = levelVal;
+    std::vector<Entrance> entrances; 
 }
 
 unsigned int Room::getId()
@@ -23,7 +23,7 @@ unsigned int Room::getId()
     return id;
 }
 
-std::string Room::getName()
+std::string Room::getName() const
 {
     return name;
 }
@@ -33,19 +33,19 @@ int Room::getLevel()
     return level;
 }
 
-std::vector<Entrance> Room::getEntrances()
+std::vector<Entrance> Room::getEntrances() const
 {
     return entrances;
 }
 
-void Room::setName(std::string name_val)
+void Room::setName(std::string nameVal)
 {
-    name = name_val;
+    name = nameVal;
 }
 
-void Room::setLevel(unsigned int level_val)
+void Room::setLevel(unsigned int levelVal)
 {
-    level = level_val;
+    level = levelVal;
 }
 
 void Room::setEntrances(std::vector<Entrance> entranceVect)
@@ -75,3 +75,25 @@ void Room::removeEntrance(unsigned int entranceId)
         entrances.erase(entrances.begin() + position);
     }
 }
+
+std::ostream& operator<< (std::ostream &os, const  Room &room)
+{
+    os << "Room ID: " << room.id << " | " << "Room name: " << room.name << " | " 
+    << "Room level: " << room.level<< "Entrances: ";
+
+    for(const auto& elem : room.entrances)
+    {
+        os<<elem<<'\n';
+    }
+    return os;
+}
+
+void Room::operator=(const Room& other)
+{
+    std::cout << "here from =operator for Room\n";
+    id = other.id;
+    name = other.name;
+    level = other.level;
+    entrances = other.entrances;
+}
+

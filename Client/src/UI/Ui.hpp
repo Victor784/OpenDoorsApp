@@ -1,8 +1,11 @@
 #pragma once
 
-#include"C:\Users\victo\Desktop\ProjectsCPP\MiniClientServer\Client\src\UI\Panel.hpp"
+#include"Panel.hpp"
+#include"../Client/Client.hpp"
 #include <string>
 
+
+class Client;
 /**
  * The Ui defines the interface of interest to clients. It also maintains a
  * reference to an instance of a Panel subclass, which represents the current
@@ -11,27 +14,35 @@
 class Ui {
 
  private:
-  Panel *panel_;
+  Panel *panel;
   std::string cmd = "";
+  Client* client;
 
  public:
-  Ui(Panel *panel, std::string newCmd) : panel_(nullptr) , cmd(newCmd) {
-    this->TransitionTo(panel);
+  Ui(Panel *panelVal, std::string newCmd) : panel(nullptr) , cmd(newCmd) {
+    this->TransitionTo(panelVal);
   }
   ~Ui() {
-    delete panel_;
+    delete panel;
+    delete client;
   }
 
-  void TransitionTo(Panel *panel) {
-    if (this->panel_ != nullptr)
-      delete this->panel_;
-    this->panel_ = panel;
-    this->panel_->set_ui(this);
-    this->panel_->run();
+  Client* getClient()
+  {
+    std::cout<<"here from getClient\n";
+    return client;
+  }
+
+  void TransitionTo(Panel *panelVal) {
+    if (this->panel != nullptr)
+      delete this->panel;
+    this->panel = panelVal;
+    this->panel->setUi(this);
+    this->panel->run();
   }
  
   void run() {
-    this->panel_->run();
+    this->panel->run();
   }
   std::string getCmd()
   {

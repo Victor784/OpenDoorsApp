@@ -18,7 +18,7 @@ add_executable(Client
     src/Repo/Entrance.cpp
     src/Repo/Room.hpp
     src/Repo/Room.cpp
-    src/Repo/Housee.hpp
+    src/Repo/House.hpp
     src/Repo/House.cpp
     src/main.cpp)
 
