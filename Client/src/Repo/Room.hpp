@@ -31,6 +31,8 @@ class Room
         unsigned int id;
         std::string name;
         int level = 0;
-        std::vector<Entrance*> entrances; 
+        std::vector<Entrance*> entrances; // LEARNED THAT THIS IS THE WORST IDEEA EVER!!
+                                          // the vector should hold actual Entrances not pointers nor references
+                                          // change this
 
 };

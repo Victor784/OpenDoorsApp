@@ -75,6 +75,74 @@ void House::removeRoom(unsigned int roomId)
     }
 }
 
+void House::changeRoom(unsigned int roomId, std::string newName, std::string newLevel, std::vector<Entrance*> newEntrances)
+{
+    bool found = false;
+    for(auto &room : rooms)
+    {
+        if(roomId == room.getId())
+        {
+            found = true;
+            if(newName != "")
+            {
+                room.setName(newName);
+            }
+            if(newLevel != "")
+            {
+                room.setLevel(std::stoul(newLevel));
+            }
+            if(!newEntrances.empty())
+            {
+                room.setEntrances(newEntrances);
+            }
+        }
+    }
+    if(found == false)
+        std::cout << "Cannot find room with the provided Id\n";
+}
+
+void House::addEntrance(unsigned int roomId, Entrance newEntrance)
+{
+    for(auto& room : rooms)
+    {
+        if(roomId == room.getId())
+        {
+            room.addEntrance(&newEntrance);
+        }
+    }
+}
+
+void House::changeEntrance(unsigned int entranceId , EntranceType newType, Position newPosition)
+{
+    for(auto& room : rooms)
+    {
+        for(auto& entrance : room.getEntrances())
+        {
+            if(entranceId == entrance->getId())
+            {
+                entrance->setType(newType);
+                entrance->setPosition(newPosition);
+                entrance->setStatus(Status::Closed);
+            }
+        }
+    }
+}
+
+void House::removeEntrance(unsigned int entranceId)
+{
+    for(auto& room : rooms)
+    {
+        for(auto& entrance : room.getEntrances())
+        {
+            if(entranceId == entrance->getId())
+            {
+                room.removeEntrance(entranceId);
+            }
+        }
+    }
+}
+
+
 std::ostream& operator<<(std::ostream& os, const Address& adr)
 {
     os<<"Country: " << adr.coutry << " | " << "City: " << " | " << 
