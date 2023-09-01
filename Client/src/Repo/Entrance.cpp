@@ -48,8 +48,9 @@ void Entrance::setStatus(Status newStatus)
     status = newStatus;
 }
 
+// TODO: template function toString would be a good idea
 
-std::string toString(EntranceType type)
+std::string utils::toString(EntranceType type)
 {
     switch (type) {
         case EntranceType::Door:
@@ -65,7 +66,7 @@ std::string toString(EntranceType type)
     }
 }
 
-std::string toString(Position position)
+std::string utils::toString(Position position)
 {
     switch (position) {
         case Position::East:
@@ -80,7 +81,7 @@ std::string toString(Position position)
             return "";
     }
 }
-std::string toString(Status status)
+std::string utils::toString(Status status)
 {
     switch (status) {
         case Status::Closed:
@@ -94,8 +95,9 @@ std::string toString(Status status)
     }
 }
 
+
 std::ostream& operator<<(std::ostream& os, const Entrance& en)
 {
-    os << "Id: " << en.id << " | " << "Type: "<< toString(en.type) << " | " << "Orientation: " << toString(en.position) << " | " << "Status: "<< toString(en.status); 
+    os << "Id: " << en.id << " | " << "Type: "<< utils::toString(en.type) << " | " << "Orientation: " << utils::toString(en.position) << " | " << "Status: "<< utils::toString(en.status); 
     return os;
 }

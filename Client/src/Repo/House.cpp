@@ -1,4 +1,5 @@
 #include "House.hpp"
+#include <string>
 
 unsigned int House::houseIdGenerator = 0;
 
@@ -38,7 +39,6 @@ Address House::getAddress()
         
 std::vector<Room> House::getRooms()
 {
-    std::cout << "here from getRooms\n";
     return rooms;
 }
 
@@ -81,4 +81,51 @@ std::ostream& operator<<(std::ostream& os, const Address& adr)
     "Street Name: " << adr.streetName << " | " << "Nr. " << adr.nr 
     << " | " << "Floor: " << adr.floor;
     return os;
+}
+
+std::string House::toString()
+{
+    std::string outPut("\n Address ----- \n"
+   "  Country: " + addres.coutry  + 
+    " City: " + addres.city + 
+    " Street: " + addres.streetName + 
+    " Nr: " + std::to_string(addres.nr) + 
+    (addres.floor == 0 ? "" : "Floor: " + std::to_string(addres.floor))
+    + "\n----------------" + 
+    "\nRoom layout: -----\n"
+    ); 
+
+    for(const auto room : rooms)
+    {
+        outPut.append("-->" + room.getName() + '\n');
+            for(const auto entrance : room.getEntrances())
+            {
+                outPut.append("   Id: " + std::to_string(entrance->getId())
+                + " | " + "Type: " + utils::toString(entrance->getType()) +
+                " | " + "Position: " + utils::toString(entrance->getPosition()) +
+                " | " + "Status: " + utils::toString(entrance->getStatus()) + '\n'
+                );
+
+            }
+    }
+    outPut.append( "\n-----------------\n");
+    return outPut;
+}
+
+void House::setAddressCountry(std::string newCountry)
+{
+    addres.coutry = newCountry;
+}
+void House::setAddressCity(std::string newCity)
+{
+    addres.city = newCity;
+}
+void House::setAddressStreet(std::string NewStreetName)
+{
+    addres.streetName = NewStreetName;
+}
+
+void House::setAddressNr(unsigned int newNr)
+{
+    addres.nr = newNr;
 }

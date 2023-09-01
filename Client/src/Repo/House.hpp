@@ -32,10 +32,17 @@ class House
         std::vector<Room> getRooms();
 
         void setAddress(Address newAddress);
+
+        void setAddressCountry(std::string newCountry);
+        void setAddressCity(std::string newCity);
+        void setAddressStreet(std::string NewStreetName);
+        void setAddressNr(unsigned int newNr);
+
         void setRooms(std::vector<Room> newRoomVect);
 
         void addRoom(Room newRoom);
         void removeRoom(unsigned int roomId);
+        std::string toString();
 
     public:
         static unsigned int houseIdGenerator ; 

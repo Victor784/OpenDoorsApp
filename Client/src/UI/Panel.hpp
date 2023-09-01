@@ -1,33 +1,17 @@
-#pragma once
+// #pragma once
 
 #include <iostream>
+#include <vector>
 
-/**
- * The base Panel class declares methods that all Concrete Panel should
- * implement and also provides a backreference to the Ui object, associated
- * with the Panel. This backreference can be used by Panels to transition the
- * Ui to another Panel.
- */
-class Ui;
+class Panel;
 
-class Panel {
-
- protected:
-  Ui *ui;
-  bool finalPanel;
-
-
- public:
-  virtual ~Panel() {
-  }
-
-  void setUi(Ui *uiVal) {
-    this->ui = uiVal;
-  }
-
-  bool  isPanelFinal()
-  {
-    return this->finalPanel;
-  }
-  virtual void run() = 0;
+class IPanel
+{
+    public:
+        virtual IPanel* exec() = 0;
+        virtual std::string getNameOfPanel() = 0;
+        virtual bool isFinalPanel() = 0;
+        virtual std::vector<IPanel*> getAvailablePanels() = 0;
+        virtual std::string getCmd() = 0;
+        virtual void setAvailablePanels(std::vector<IPanel*> vect) = 0;
 };

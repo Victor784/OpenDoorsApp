@@ -1,233 +1,360 @@
-#include"ConcretePanels.hpp"
-#include <vector>
+#include "ConcretePanels.hpp"
+#include <string>
 
-void PanelInitial::run() {
-  
-    std::cout << '+' << std::string(11, '-') << "First Panel" << std::string(11, '-') << '+' << '\n';
-
-    std::cout << "1.Check entrances.\n";
-    std::cout << "2.Update house layout. \n";
-    std::cout << "0.Exit\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    std::cout << " \nTESTING: " << "house ID in initpanel" <<this->ui->getClient()->getHouse().getId() << '\n';
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 1:
-            this->ui->TransitionTo(new PanelCheckEntrances);
-            break;
-        case 2:
-            this->ui->TransitionTo(new PanelUpdateHouseLayout);
-            break;
-        case 3:
-            // TOOD find a way to close the process when the users chooses to close the app. Maybe an exit panel ? 
-            break;
-        default:
-            break;
-    }
-    
-}
-
-
-void PanelCheckEntrances::run() {
- std::cout << '+' << std::string(11, '-') << "Check entrs" << std::string(11, '-') << '+' << '\n';
-
-    std::cout << "1.Check rooms.\n";
-    std::cout << "2.Check all entrances. \n";
-    std::cout << "0.Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 1:
-            this->ui->TransitionTo(new PanelCheckRooms);
-            break;
-        case 2:
-            this->ui->TransitionTo(new PanelCheckAllEntrances);
-            break;
-        case 0:
-            this->ui->TransitionTo(new PanelCheckAllEntrances);
-            break;
-        default:
-            break;
-    }
-}
-
-void PanelUpdateHouseLayout::run() {
-  std::cout << '+' << std::string(11, '-') << "Update Haus" << std::string(11, '-') << '+' << '\n';
-
-    std::cout << "1.Add room.\n";
-    std::cout << "2.Delete room.\n";
-    std::cout << "3.Rename room.\n";
-    std::cout << "4.Add entrance.\n";
-    std::cout << "5.Delete entrace.\n";
-    std::cout << "6.Delete entrace.\n";
-    std::cout << "7.Show current house Layout.\n";
-    std::cout << "0.Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 1:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 2:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 3:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 4:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 5:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 6:
-            this->ui->TransitionTo(new PanelTest);
-            break;
-        case 7:
-            this->ui->TransitionTo(new PanelTest);
-            break;    
-        case 0:
-            this->ui->TransitionTo(new PanelCheckAllEntrances);
-            break;
-        default:
-            break;
-    }
-}
-
-void PanelCheckRooms::run() {
- std::cout << '+' << std::string(11, '-') << "Check rooms" << std::string(11, '-') << '+' << '\n';
-
-    std::cout << "Rooms : \n";
-    std::cout << "here1\n";
-    auto vect = ui->getClient()->getHouse().getRooms();
-    std::cout << "here2\n";
-    int i = 1;
-    for (auto room : vect)
-    {
-        std::cout << "=========================\n";
-        std::cout <<i<<". "<< room.getName() << '\n';
-        std::cout << "=========================\n";
-        i++;
-    }
-
-    std::cout << "0. Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    int option;
-    std::cin >> option;
-    if(option == 0)
-    {
-        this->ui->TransitionTo(new PanelCheckEntrances);
-    }
-    else if(option > 0 && option <= i)
-    {
-        this->ui->TransitionTo(new PanelRoom(vect[i-1]));
-    }
-
-}
-
-void PanelCheckAllEntrances::run() {
- std::cout << '+' << std::string(11, '-') << "Check all Entrances" << std::string(11, '-') << '+' << '\n';
-
-    std::cout<< "--------- NOT IMPLEMENTED YET -----------\n";
-    std::cout << "1.ROOM1.\n";
-    std::cout << "2.ROOM2. \n";
-    std::cout << "0.Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 1:
-            // this->ui->TransitionTo(new ConcretePanelB);
-            break;
-        case 2:
-            // this->ui->TransitionTo(new ConcretePanelC);
-            break;
-        case 0:
-            this->ui->TransitionTo(new PanelCheckEntrances);
-            break;
-        default:
-            break;
-    }
-}
-
-void PanelTest::run() {
- std::cout << '+' << std::string(11, '-') << "Panel test " << std::string(11, '-') << '+' << '\n';
-
-    // TODO : function that gets the data from the server on the entrances of the house
-    std::cout<< "--------- NOT IMPLEMENTED YET -----------\n";
-    std::cout << "1.Option1.\n";
-    std::cout << "2.Option2. \n";
-    std::cout << "0.Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-    
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 1:
-            // this->ui->TransitionTo(new ConcretePanelB);
-            break;
-        case 2:
-            // this->ui->TransitionTo(new ConcretePanelC);
-            break;
-        case 0:
-            this->ui->TransitionTo(new PanelUpdateHouseLayout);
-            break;
-        default:
-            break;
-    }
-}
-
-PanelRoom::PanelRoom(const Room& room)
-{
-    roomPtr = &room;
-}
-
-
-void PanelRoom::run()
-{
-
- std::cout << '+' << std::string(11, '-') << roomPtr->getName() << std::string(11, '-') << '+' << '\n';
-
-    std::vector<Entrance> entrances = roomPtr->getEntrances();
-    bool isClosed = true;
-    for (auto entrance : entrances)
-    {
-        if(entrance.getStatus() == Status::Open ||
-            entrance.getStatus() == Status::Folded)
-                isClosed = false;
-    }
-    std::cout << "Room status: " << (isClosed ? "closed" : "open") << '\n';
-    std::cout << "1." << (isClosed ? "Mark room as open" : "Mark room as closed");
-    std::cout << "2.Check the status of the entrances. \n";
-    std::cout << "0.Back\n";
-    std::cout << '+' << std::string(33, '-') << '+' << '\n';
-
-    int option;
-    std::cin >> option;
-    switch (option) {
-        case 0:
-            this->ui->TransitionTo(new PanelCheckRooms);
-            break;
-        case 1:
-            // TODO - function to make all entrances open / closed
-            break;
-        case 2:
-            std::cout << "\n Entrances status : \n";
-            for (auto entrance : entrances)
+IPanel* PanelForOptionDisplay::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
             {
-                std::cout << entrance << '\n';
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
             }
-            std::cout << "1." << (isClosed ? "Mark room as open" : "Mark room as closed");
-            std::cout << "0.Back\n";
-        default:
-            break;
-    }
-}
+            else
+            {   
+                return availablePanels[option];
+            }
+            
+        }
+
+IPanel* PanelForListAllEntrances::exec()
+        {
+            std::cout << "---------" << nameOfPanel << "-----------" << '\n';
+            int counter = 1;
+            std::vector<Entrance*> auxEntranceVect; // in later implementation the house class should have a getAllEntrances method that can be used instead of an aux
+            for(int i = 0; i < repoPtr->getRooms().size(); i ++ )
+            
+            {
+                std::cout <<"-->" << (*repoPtr).getRooms()[i].getName() << '\n';
+                    for(int j =0; j< (*repoPtr).getRooms()[i].getEntrances().size(); j++)
+                    {
+                        std::cout << "    " << counter ++ << '.' << *(*repoPtr).getRooms()[i].getEntrances()[j] << '\n';
+                        auxEntranceVect.push_back((*repoPtr).getRooms()[i].getEntrances()[j]);
+                    }
+            }
+
+            std::cout << display;
+            std::cout << "Change the status of an entrance by pressing the number asociated with it: \n";
+            int option;
+            std::cin >> option;
+            if(option == 0)
+            {
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else if (option > counter - 1)
+            {   
+                std::cout << "\nInvalid choice..\n";
+                return availablePanels[0];
+            }
+            else 
+            {
+                // case for changing the status
+                Entrance* entrancePtrV = auxEntranceVect[option -1];
+                if(entrancePtrV->getType() == EntranceType::RabatableDoor || 
+                    entrancePtrV->getType() == EntranceType::RabatableWindow)
+                    {
+                        std::cout << "Choose new entrance state : \n";
+                        if(entrancePtrV->getStatus() == Status::Closed)
+                        {
+                            std::cout << "1. Folded\n 2. Open\n";
+                            int option;
+                            std::cin >> option;
+                            switch (option) {
+                                case 1:
+                                    entrancePtrV->setStatus(Status::Folded);
+                                    // TODO: send msg to Server in this case
+                                case 2:
+                                    entrancePtrV->setStatus(Status::Open);
+                                    // TODO: send msg to Server in this case
+                                default:
+                                    std::cout << "Invalid choice, no action was taken\n";
+                            }
+                        }
+                        else if(entrancePtrV->getStatus() == Status::Folded)
+                        {
+                            std::cout << "1. Closed\n 2. Open\n";
+                            int option;
+                            std::cin >> option;
+                            switch (option) {
+                                case 1:
+                                    entrancePtrV->setStatus(Status::Closed);
+                                    // TODO: send msg to Server in this case
+                                case 2:
+                                    entrancePtrV->setStatus(Status::Open);
+                                    // TODO: send msg to Server in this case
+                                default:
+                                    std::cout << "Invalid choice, no action was taken\n";
+                            }
+                        }
+                        else { //open state
+                            std::cout << "1. Folded\n 2. Closed\n";
+                            int option;
+                            std::cin >> option;
+                            switch (option) {
+                                case 1:
+                                    entrancePtrV->setStatus(Status::Folded);
+                                    // TODO: send msg to Server in this case
+                                case 2:
+                                    entrancePtrV->setStatus(Status::Closed);
+                                    // TODO: send msg to Server in this case
+                                default:
+                                    std::cout << "Invalid choice, no action was taken\n";
+                                }
+                            }
+                    }
+                    else 
+                    {
+                        if(entrancePtrV->getStatus() == Status::Closed)
+                        {
+                            // TODO: send msg to Server in this case
+                            entrancePtrV->setStatus(Status::Open);
+                        }    
+                        else
+                        {
+                            // TODO: send msg to Server in this case
+                            entrancePtrV->setStatus(Status::Closed);
+                        }        
+                    }
+            
+        }
+        return this;
+        }
+
+
+IPanel* PanelForChangeHouseLayout::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << (*house).toString();
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                return availablePanels[option];
+            }
+            
+        }
+
+
+IPanel* PanelForChangeHouseDetails::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << house->toString();
+            std::cout << display;
+            int option;
+            std::cin >> option;
+
+            if(option == 0)
+            {
+                return availablePanels[0];
+            }
+            else 
+            {    
+                switch (option) {
+                    case 1:
+                        {
+                            std::cout << "\n Enter new country: ";
+                            std::string newName;
+                            std::cin >> newName; //TOOD validate input
+                            house->setAddressCountry(newName);
+                            //TODO send to server updata request
+                            break;
+                        }
+                    case 2:
+                        {
+                            std::cout << "\n Enter new city: ";
+                            std::string newName;
+                            std::cin >> newName; //TOOD validate input
+                            house->setAddressCity(newName);
+                            //TODO send to server updata request
+                            break;
+                        }
+                    case 3:
+                        {
+                            std::cout << "\n Enter new street name: ";
+                            std::string newName;
+                            std::cin >> newName; //TOOD validate input
+                            house->setAddressStreet(newName);
+                            //TODO send to server updata request
+                            break;
+                        }
+                    case 4:
+                        {
+                        std::cout << "\n Enter new nr: ";
+                            unsigned int nr;
+                            std::cin >> nr; //TOOD validate input
+                            house->setAddressNr(nr); 
+                            //TODO send to server updata request
+                            break;
+                        }
+                    default:
+                        std::cout << "\nError..no action taken.\n";
+                }
+                return this;
+            }
+        }     
+
+
+IPanel* PanelForChangeRooms::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            for (const auto& room : house->getRooms())
+            {
+                std::cout << "Id: " << room.getId() << " Name: " << room.getName()
+                << " Level: " << room.getLevel() << " Nr. of entrances: " << room.getEntrances().size() << '\n';
+            }
+            std::cout << "---------\n";
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                return availablePanels[option];
+            }
+            
+        }
+
+IPanel* PanelForAddRoom::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << "Name: ";
+            std::string name;
+            std::cin >> name;
+            std::cout << "Level: ";
+            int level;
+            std::cin >> level;
+            std::cout << "Entrances can be added from the \"Entrances\" panel\n";
+            std::cout << "---------\n";
+            Room room(name,level);
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                if(option == 1)
+                {
+                    house->addRoom(room);
+                    cmd = "{add-room, id:" + std::to_string(room.getId()) +",name:" + room.getName() + ",level:" + std::to_string(room.getLevel()) + "}";
+                    std::cout << "\nRoom added successfully..\n";
+                }
+                else if(option == 0){
+                    std::cout << "\nOperation aborted..\n";
+                }
+                return availablePanels[option];
+            }
+            
+        }
+
+
+IPanel* PanelForChangeRoom::exec()
+        {
+            // TODO: This needs to be changed there are better ways to do this
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            std::cout << "Enter the Id of the room that needs to be changed:";
+            unsigned int id;
+            std::cin >> id;
+            std::vector<Entrance*> auxEntr;
+            bool found = false;
+            for(const auto&  room : house->getRooms())
+            {
+                if(room.getId() == id)
+                {
+                    auxEntr = room.getEntrances();
+                    found = true;
+                }
+            }
+            if(found)
+            {
+                house->removeRoom(id);
+                std::cout << "New name: ";
+                std::string name;
+                std::cin >> name;
+                std::cout << "New Level: ";
+                int level;
+                std::cin >> level;
+                std::cout << "Entrances can be changed from the \"Entrances\" panel\n";
+                std::cout << "---------\n";
+                Room room(name,level);
+                std::cout << display;
+                int option;
+                std::cin >> option;
+                if(option >= availablePanels.size()) //a lso check if the option is of type int
+                {
+                    std::cout << "Invalid input..\n";
+                    return availablePanels[0]; // all panels have an exit / back option on the 0th position
+                }
+                else
+                {   
+                    if(option == 1)
+                    {
+                        house->addRoom(room);
+                        cmd = "{change-room , id:" + std::to_string(id) +",new-name:" + room.getName() + ",new-level:" + std::to_string(room.getLevel()) + "}";
+                        std::cout << "\nRoom changed successfully..\n";
+                    }
+                    else if(option == 0){
+                        std::cout << "\nOperation aborted..\n";
+                    }
+                    return availablePanels[option];
+                }
+                
+            }
+            else {
+            std::cout << "Id not found..\n";
+            return this;
+            }      
+        }
+
+
+IPanel* PanelForDeleteRoom::exec()
+        {
+            std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+           std::cout << "Enter the Id of the room that needs to be changed:";
+            unsigned int id;
+            std::cin >> id;
+            std::cout << "---------\n";
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                if(option == 1)
+                {
+                    house->removeRoom(id);
+                    cmd = "{delete-room, id:" + std::to_string(id);
+                    std::cout << "\nRoom deleted successfully..\n";
+                }
+                else if(option == 0){
+                    std::cout << "\nOperation aborted..\n";
+                }
+                return availablePanels[option];
+            }
+            
+        }
