@@ -2,7 +2,7 @@
 
 unsigned int Room::roomIdGenerator = 0;
 
-Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance*> entranceVal)
+Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance> entranceVal)
 {
     id = ++roomIdGenerator;
     name = nameVal;
@@ -33,7 +33,7 @@ int Room::getLevel() const
     return level;
 }
 
-std::vector<Entrance*> Room::getEntrances() const
+std::vector<Entrance> Room::getEntrances() const
 {
     return entrances;
 }
@@ -48,12 +48,12 @@ void Room::setLevel(unsigned int levelVal)
     level = levelVal;
 }
 
-void Room::setEntrances(std::vector<Entrance*> entranceVect)
+void Room::setEntrances(std::vector<Entrance> entranceVect)
 {
     entrances = entranceVect;
 }
 
-void Room::addEntrance(Entrance* newEntrance)
+void Room::addEntrance(Entrance newEntrance)
 {
     entrances.push_back(newEntrance);
 }
@@ -64,7 +64,7 @@ void Room::removeEntrance(unsigned int entranceId)
     bool found = false;
     while (position < entrances.size() && !found )
     {
-        if((*entrances[position]).getId() == entranceId)
+        if((entrances[position]).getId() == entranceId)
             found = true;
         else
             position = position + 1;

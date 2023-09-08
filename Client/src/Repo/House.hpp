@@ -42,7 +42,7 @@ class House
 
         void addRoom(Room newRoom); //TODO: if you add rooms this way, you need to create them first, meaning that the lifetime of the objects is dependent on the exec() method
         void removeRoom(unsigned int roomId);        
-        void changeRoom(unsigned int roomId, std::string newName = "", std::string newLevel = "", std::vector<Entrance*> newEntrances = {});
+        void changeRoom(unsigned int roomId, std::string newName = "", std::string newLevel = "", std::vector<Entrance> newEntrances = {});
 
         void addEntrance(unsigned int roomId, Entrance newEntrance);
         void changeEntrance(unsigned int entranceId , EntranceType newType, Position newPosition);

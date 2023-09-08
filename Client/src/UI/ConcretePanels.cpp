@@ -25,14 +25,14 @@ IPanel* PanelForListAllEntrances::exec()
         {
             std::cout << "---------" << nameOfPanel << "-----------" << '\n';
             int counter = 1;
-            std::vector<Entrance*> auxEntranceVect; // in later implementation the house class should have a getAllEntrances method that can be used instead of an aux
+            std::vector<Entrance> auxEntranceVect; // in later implementation the house class should have a getAllEntrances method that can be used instead of an aux
             for(int i = 0; i < repoPtr->getRooms().size(); i ++ )
             
             {
                 std::cout <<"-->" << (*repoPtr).getRooms()[i].getName() << '\n';
                     for(int j =0; j< (*repoPtr).getRooms()[i].getEntrances().size(); j++)
                     {
-                        std::cout << "    " << counter ++ << '.' << *(*repoPtr).getRooms()[i].getEntrances()[j] << '\n';
+                        std::cout << "    " << counter ++ << '.' << (*repoPtr).getRooms()[i].getEntrances()[j] << '\n';
                         auxEntranceVect.push_back((*repoPtr).getRooms()[i].getEntrances()[j]);
                     }
             }
@@ -53,38 +53,38 @@ IPanel* PanelForListAllEntrances::exec()
             else 
             {
                 // case for changing the status
-                Entrance* entrancePtrV = auxEntranceVect[option -1];
-                if(entrancePtrV->getType() == EntranceType::RabatableDoor || 
-                    entrancePtrV->getType() == EntranceType::RabatableWindow)
+                Entrance entrancePtrV = auxEntranceVect[option -1];
+                if(entrancePtrV.getType() == EntranceType::RabatableDoor || 
+                    entrancePtrV.getType() == EntranceType::RabatableWindow)
                     {
                         std::cout << "Choose new entrance state : \n";
-                        if(entrancePtrV->getStatus() == Status::Closed)
+                        if(entrancePtrV.getStatus() == Status::Closed)
                         {
                             std::cout << "1. Folded\n 2. Open\n";
                             int option;
                             std::cin >> option;
                             switch (option) {
                                 case 1:
-                                    entrancePtrV->setStatus(Status::Folded);
+                                    entrancePtrV.setStatus(Status::Folded);
                                     // TODO: send msg to Server in this case
                                 case 2:
-                                    entrancePtrV->setStatus(Status::Open);
+                                    entrancePtrV.setStatus(Status::Open);
                                     // TODO: send msg to Server in this case
                                 default:
                                     std::cout << "Invalid choice, no action was taken\n";
                             }
                         }
-                        else if(entrancePtrV->getStatus() == Status::Folded)
+                        else if(entrancePtrV.getStatus() == Status::Folded)
                         {
                             std::cout << "1. Closed\n 2. Open\n";
                             int option;
                             std::cin >> option;
                             switch (option) {
                                 case 1:
-                                    entrancePtrV->setStatus(Status::Closed);
+                                    entrancePtrV.setStatus(Status::Closed);
                                     // TODO: send msg to Server in this case
                                 case 2:
-                                    entrancePtrV->setStatus(Status::Open);
+                                    entrancePtrV.setStatus(Status::Open);
                                     // TODO: send msg to Server in this case
                                 default:
                                     std::cout << "Invalid choice, no action was taken\n";
@@ -96,10 +96,10 @@ IPanel* PanelForListAllEntrances::exec()
                             std::cin >> option;
                             switch (option) {
                                 case 1:
-                                    entrancePtrV->setStatus(Status::Folded);
+                                    entrancePtrV.setStatus(Status::Folded);
                                     // TODO: send msg to Server in this case
                                 case 2:
-                                    entrancePtrV->setStatus(Status::Closed);
+                                    entrancePtrV.setStatus(Status::Closed);
                                     // TODO: send msg to Server in this case
                                 default:
                                     std::cout << "Invalid choice, no action was taken\n";
@@ -108,15 +108,15 @@ IPanel* PanelForListAllEntrances::exec()
                     }
                     else 
                     {
-                        if(entrancePtrV->getStatus() == Status::Closed)
+                        if(entrancePtrV.getStatus() == Status::Closed)
                         {
                             // TODO: send msg to Server in this case
-                            entrancePtrV->setStatus(Status::Open);
+                            entrancePtrV.setStatus(Status::Open);
                         }    
                         else
                         {
                             // TODO: send msg to Server in this case
-                            entrancePtrV->setStatus(Status::Closed);
+                            entrancePtrV.setStatus(Status::Closed);
                         }        
                     }
             
@@ -276,7 +276,7 @@ IPanel* PanelForChangeRoom::exec()
             std::cout << "Enter the Id of the room that needs to be changed:";
             unsigned int id;
             std::cin >> id;
-            std::vector<Entrance*> auxEntr;
+            std::vector<Entrance> auxEntr;
             bool found = false;
             for(const auto&  room : house->getRooms())
             {
@@ -369,7 +369,7 @@ IPanel* PanelForChangeEntrances::exec()
                 std::cout << "--> " << room.getName()<< " Id: " << room.getId() <<  '\n';
                 for(auto entrace : room.getEntrances())
                     {
-                        std::cout << "    " << *entrace << '\n';
+                        std::cout << "    " << entrace << '\n';
                     }
             }
             std::cout << "---------\n";

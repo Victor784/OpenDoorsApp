@@ -14,22 +14,22 @@ Entrance::Entrance(EntranceType typeVal , Position positionVal , Status statusVa
         
 }
 
-unsigned int Entrance::getId()
+unsigned int Entrance::getId() const
 {
     return id;
 }
 
-EntranceType Entrance::getType()
+EntranceType Entrance::getType() const
 {
     return type;
 }
 
-Position Entrance::getPosition()
+Position Entrance::getPosition() const
 {
     return position;
 }
         
-Status Entrance::getStatus()
+Status Entrance::getStatus() const
 {
     return status;
 }

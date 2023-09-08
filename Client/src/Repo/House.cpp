@@ -75,7 +75,7 @@ void House::removeRoom(unsigned int roomId)
     }
 }
 
-void House::changeRoom(unsigned int roomId, std::string newName, std::string newLevel, std::vector<Entrance*> newEntrances)
+void House::changeRoom(unsigned int roomId, std::string newName, std::string newLevel, std::vector<Entrance> newEntrances)
 {
     bool found = false;
     for(auto &room : rooms)
@@ -107,7 +107,7 @@ void House::addEntrance(unsigned int roomId, Entrance newEntrance)
     {
         if(roomId == room.getId())
         {
-            room.addEntrance(&newEntrance);
+            room.addEntrance(newEntrance);
         }
     }
 }
@@ -118,11 +118,11 @@ void House::changeEntrance(unsigned int entranceId , EntranceType newType, Posit
     {
         for(auto& entrance : room.getEntrances())
         {
-            if(entranceId == entrance->getId())
+            if(entranceId == entrance.getId())
             {
-                entrance->setType(newType);
-                entrance->setPosition(newPosition);
-                entrance->setStatus(Status::Closed);
+                entrance.setType(newType);
+                entrance.setPosition(newPosition);
+                entrance.setStatus(Status::Closed);
             }
         }
     }
@@ -134,7 +134,7 @@ void House::removeEntrance(unsigned int entranceId)
     {
         for(auto& entrance : room.getEntrances())
         {
-            if(entranceId == entrance->getId())
+            if(entranceId == entrance.getId())
             {
                 room.removeEntrance(entranceId);
             }
@@ -168,10 +168,10 @@ std::string House::toString()
         outPut.append("-->" + room.getName() + '\n');
             for(const auto entrance : room.getEntrances())
             {
-                outPut.append("   Id: " + std::to_string(entrance->getId())
-                + " | " + "Type: " + utils::toString(entrance->getType()) +
-                " | " + "Position: " + utils::toString(entrance->getPosition()) +
-                " | " + "Status: " + utils::toString(entrance->getStatus()) + '\n'
+                outPut.append("   Id: " + std::to_string(entrance.getId())
+                + " | " + "Type: " + utils::toString(entrance.getType()) +
+                " | " + "Position: " + utils::toString(entrance.getPosition()) +
+                " | " + "Status: " + utils::toString(entrance.getStatus()) + '\n'
                 );
 
             }

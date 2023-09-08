@@ -32,10 +32,10 @@ class Entrance
         Entrance(EntranceType typeVal , Position positionVal , Status statusVal);
         ~Entrance() = default;
 
-        unsigned int getId();
-        EntranceType getType();
-        Position getPosition();
-        Status getStatus();
+        unsigned int getId() const;
+        EntranceType getType() const;
+        Position getPosition() const;
+        Status getStatus() const;
 
         void setType(EntranceType newType);
         void setPosition(Position newPosition);
