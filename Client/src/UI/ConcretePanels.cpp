@@ -331,7 +331,7 @@ IPanel* PanelForDeleteRoom::exec()
         {
             std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
             
-           std::cout << "Enter the Id of the room that needs to be changed:";
+            std::cout << "Enter the Id of the room that needs to be deleted:";
             unsigned int id;
             std::cin >> id;
             std::cout << "---------\n";
@@ -467,6 +467,38 @@ IPanel* PanelForAddEntrance::exec()
                     house->addEntrance(id,std::move(*entrance));
                     cmd = "{add-entrance, room-id:" + std::to_string(id) +",type:" + utils::toString(enType) + ",position:" + utils::toString(position) + "}";
                     std::cout << "\nRoom added successfully..\n";
+                }
+                else if(option == 0){
+                    std::cout << "\nOperation aborted..\n";
+                }
+                return availablePanels[option];
+            }
+            
+        }
+
+IPanel* PanelForDeleteEntrance::exec()
+        {
+        std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << "Enter the Id of the entrance that needs to be deleted:";
+            unsigned int id;
+            std::cin >> id;
+            std::cout << "---------\n";
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                if(option == 1)
+                {
+                    house->removeEntrance(id);
+                    cmd = "{delete-entrance, id:" + std::to_string(id);
+                    std::cout << "\nEntrance deleted successfully..\n";
                 }
                 else if(option == 0){
                     std::cout << "\nOperation aborted..\n";

@@ -47,21 +47,15 @@ int main()
 
     PanelForOptionDisplay PanelExit("Exit Panel" , "....EXITING.....\n", false, "");
 
-    PanelForOptionDisplay PanelInit("PanelInit", " 1.Panel 1\n 2.Change house layout\n 3.Check entrances \n 0.Exit\n", false, "");
-
-    PanelForOptionDisplay Panel1("Panel 1", " 1.Panel 1.1\n 2.Panel 1.2\n 0.Back", false, "");
+    PanelForOptionDisplay PanelInit("PanelInit", " 1.Change house layout\n 2.Check entrances \n 0.Exit\n", false, "");
 
     PanelForChangeHouseLayout PanelChangeHouseLayout("House layout", " 1.House details\n 2.Rooms\n 3.Entrances\n 0.Back\n", false, "", &house);
-
-    PanelForOptionDisplay Panel1_1("Panel1_1", " Final Panel\n 0.Back\n 1.send \n 2.abort\n", true, "cmd from pnl1_1");
-
-    PanelForOptionDisplay Panel1_2("Panel1_2", " Final Panel\n 0.Back\n 1.send \n 2.abort\n", true, "cmd from pnl1_2");
 
     PanelForListAllEntrances PanelListAllEntrances("All entrances " , " 0.Back\n" , false , "" , &house);
 
     PanelForChangeHouseDetails PanelForChangeHouseDetails("House details" , " 1.Change country\n 2.Change city\n 3.Change street\n 4.Change nr\n 0.Back\n", false, "" , &house );
 
-    PanelForChangeRooms PanelForChangeRooms("Rooms", " 1.Add room\n 2.Change room\n 3.Delete room\n 0.Back\n", false, "", &house);
+    PanelForChangeRooms PanelForChangeRooms("Rooms", " 1.Add room\n 2.Delete room\n 3.Change room\n 0.Back\n", false, "", &house);
     
     PanelForAddRoom PanelForAddRoom("Add room", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
@@ -74,11 +68,13 @@ int main()
     
     PanelForAddEntrance PanelForAddEntrance("Add entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
+
+    PanelForDeleteEntrance PanelForDeleteEntrance("Delete entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+
+
+    IPanel* panelDeleteEntrancePtr = &PanelForDeleteEntrance;
     IPanel* initPanelPtr = &PanelInit;
-    IPanel* panel1Ptr = &Panel1;
     IPanel* panelChangeHouseLayoutPtr = &PanelChangeHouseLayout;
-    IPanel* panel1_1Ptr = &Panel1_1;
-    IPanel* panel1_2Ptr = &Panel1_2;
     IPanel* panelExitPtr = &PanelExit;
     IPanel* panelConfirmPtr = &PanelConfirm;
     IPanel* panelAbortPtr = &PanelAbort;
@@ -91,6 +87,11 @@ int main()
     IPanel* panelForChangeEntrancesPtr =  &PanelForChangeEntrances;
     IPanel* panelForAddEntrancePtr = &PanelForAddEntrance;
 
+    std::vector<IPanel*> vectPanelForDeleteEntrance;
+    vectPanelForDeleteEntrance.push_back(panelForChangeEntrancesPtr);
+    vectPanelForDeleteEntrance.push_back(panelConfirmPtr);
+    vectPanelForDeleteEntrance.push_back(panelAbortPtr);
+
     std::vector<IPanel*> vectPanelForAddEntrance;
     vectPanelForAddEntrance.push_back(panelForChangeEntrancesPtr);
     vectPanelForAddEntrance.push_back(panelConfirmPtr);
@@ -99,6 +100,7 @@ int main()
     std::vector<IPanel*> vectPanelForChangeEntrances;
     vectPanelForChangeEntrances.push_back(panelChangeHouseLayoutPtr);
     vectPanelForChangeEntrances.push_back(panelForAddEntrancePtr);
+    vectPanelForChangeEntrances.push_back(panelDeleteEntrancePtr);
 
     std::vector<IPanel*> vectPanelForDeleteRoom;
     vectPanelForDeleteRoom.push_back(panelForChangeRoomsPtr);
@@ -120,6 +122,7 @@ int main()
     vectPanelForChengeRooms.push_back(panelForAddRoomPtr);
     vectPanelForChengeRooms.push_back(panelForChangeRoomPtr);
     vectPanelForChengeRooms.push_back(panelForDeleteRoomPtr);
+   
 
     std::vector<IPanel*> vectPanelForChangeHouseDetails;
     vectPanelForChangeHouseDetails.push_back(panelChangeHouseLayoutPtr);
@@ -129,14 +132,10 @@ int main()
 
     std::vector<IPanel*> vectForPanelInit;
     vectForPanelInit.push_back(panelExitPtr);
-    vectForPanelInit.push_back(panel1Ptr);
     vectForPanelInit.push_back(panelChangeHouseLayoutPtr);
     vectForPanelInit.push_back(panelListAllEntrancesPtr);
 
-    std::vector<IPanel*> vectForPanel1;
-    vectForPanel1.push_back(initPanelPtr);
-    vectForPanel1.push_back(panel1_1Ptr);
-    vectForPanel1.push_back(panel1_2Ptr);
+
 
     std::vector<IPanel*> vectForpanelChangeHouseLayout;
     vectForpanelChangeHouseLayout.push_back(initPanelPtr);
@@ -146,22 +145,10 @@ int main()
     
    
     
-    std::vector<IPanel*> vectForPanel1_1;
-    vectForPanel1_1.push_back(panel1Ptr);
-    vectForPanel1_1.push_back(panelConfirmPtr);
-    vectForPanel1_1.push_back(panelAbortPtr);
-
-    std::vector<IPanel*> vectForPanel1_2;
-    vectForPanel1_2.push_back(panel1Ptr);
-    vectForPanel1_2.push_back(panelConfirmPtr);
-    vectForPanel1_2.push_back(panelAbortPtr);
     
     initPanelPtr->setAvailablePanels(vectForPanelInit);
-    panel1Ptr->setAvailablePanels(vectForPanel1);
     panelChangeHouseLayoutPtr->setAvailablePanels(vectForpanelChangeHouseLayout);
 
-    panel1_1Ptr->setAvailablePanels(vectForPanel1_1);
-    panel1_2Ptr->setAvailablePanels(vectForPanel1_2);
     panelListAllEntrancesPtr->setAvailablePanels(vectForPanelListAllEntrances);
     panelForChangeHouseDetailsPtr->setAvailablePanels(vectPanelForChangeHouseDetails);
     PanelForChangeRooms.setAvailablePanels(vectPanelForChengeRooms);
@@ -170,6 +157,7 @@ int main()
     panelForDeleteRoomPtr->setAvailablePanels(vectPanelForDeleteRoom);
     panelForChangeEntrancesPtr->setAvailablePanels(vectPanelForChangeEntrances);
     panelForAddEntrancePtr->setAvailablePanels(vectPanelForAddEntrance);
+    panelDeleteEntrancePtr->setAvailablePanels(vectPanelForDeleteEntrance);
 
     UI s(initPanelPtr, "", &house);
 

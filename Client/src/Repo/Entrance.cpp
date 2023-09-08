@@ -6,7 +6,6 @@ unsigned int Entrance::idGenerator = 0;
 Entrance::Entrance(EntranceType typeVal , Position positionVal , Status statusVal)
 {
 
-            std::cout << "\nentrance constuctor\n idGenerator = " << idGenerator << '\n';
             id = ++idGenerator;
             type = typeVal;
             position = positionVal;
