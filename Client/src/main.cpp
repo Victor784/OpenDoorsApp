@@ -64,14 +64,16 @@ int main()
     PanelForDeleteRoom PanelForDeleteRoom("Delete room", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
     
-    PanelForChangeEntrances PanelForChangeEntrances("Entrances", " 1.Add entrance\n 2.Change entrance\n 3.Delete entrance\n 0.Back\n", false, "", &house);
+    PanelForChangeEntrances PanelForChangeEntrances("Entrances", " 1.Add entrance\n 2.Delete entrance\n 3.Change entrance\n 0.Back\n", false, "", &house);
     
     PanelForAddEntrance PanelForAddEntrance("Add entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
 
     PanelForDeleteEntrance PanelForDeleteEntrance("Delete entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
+    PanelForChangeEntrance PanelForChangeEntrance("Change entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
 
+    IPanel* panelChangeEntrancePtr = &PanelForChangeEntrance;
     IPanel* panelDeleteEntrancePtr = &PanelForDeleteEntrance;
     IPanel* initPanelPtr = &PanelInit;
     IPanel* panelChangeHouseLayoutPtr = &PanelChangeHouseLayout;
@@ -87,6 +89,11 @@ int main()
     IPanel* panelForChangeEntrancesPtr =  &PanelForChangeEntrances;
     IPanel* panelForAddEntrancePtr = &PanelForAddEntrance;
 
+    std::vector<IPanel*> vectPanelForChangeEntrance;
+    vectPanelForChangeEntrance.push_back(panelForChangeEntrancesPtr);
+    vectPanelForChangeEntrance.push_back(panelConfirmPtr);
+    vectPanelForChangeEntrance.push_back(panelAbortPtr);
+
     std::vector<IPanel*> vectPanelForDeleteEntrance;
     vectPanelForDeleteEntrance.push_back(panelForChangeEntrancesPtr);
     vectPanelForDeleteEntrance.push_back(panelConfirmPtr);
@@ -101,6 +108,7 @@ int main()
     vectPanelForChangeEntrances.push_back(panelChangeHouseLayoutPtr);
     vectPanelForChangeEntrances.push_back(panelForAddEntrancePtr);
     vectPanelForChangeEntrances.push_back(panelDeleteEntrancePtr);
+    vectPanelForChangeEntrances.push_back(panelChangeEntrancePtr);
 
     std::vector<IPanel*> vectPanelForDeleteRoom;
     vectPanelForDeleteRoom.push_back(panelForChangeRoomsPtr);
@@ -158,6 +166,7 @@ int main()
     panelForChangeEntrancesPtr->setAvailablePanels(vectPanelForChangeEntrances);
     panelForAddEntrancePtr->setAvailablePanels(vectPanelForAddEntrance);
     panelDeleteEntrancePtr->setAvailablePanels(vectPanelForDeleteEntrance);
+    panelChangeEntrancePtr->setAvailablePanels(vectPanelForChangeEntrance);
 
     UI s(initPanelPtr, "", &house);
 

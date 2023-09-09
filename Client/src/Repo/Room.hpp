@@ -22,7 +22,7 @@ class Room
 
         void addEntrance(Entrance newEntrance);
         void removeEntrance(unsigned int entranceId);
-
+        void changeEntrance(unsigned int id, EntranceType newType, Position newPos );
         friend std::ostream& operator<< (std::ostream& os, const Room& room);
         void operator=(const Room& other);
     public:

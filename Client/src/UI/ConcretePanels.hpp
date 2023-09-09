@@ -259,3 +259,25 @@ class PanelForDeleteEntrance : public IPanel
         void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
         ~PanelForDeleteEntrance() = default;
 };  
+
+class PanelForChangeEntrance : public IPanel
+{
+    public:
+        std::string nameOfPanel;
+        std::vector<IPanel*> availablePanels;
+        std::string display;
+        bool isFinalPanelV;
+        std::string cmd;
+        House* house;
+    public:
+        PanelForChangeEntrance() = delete;
+        PanelForChangeEntrance(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
+        IPanel* exec() override ; 
+        bool isFinalPanel() override {return isFinalPanelV;}
+        std::string getNameOfPanel() override {return nameOfPanel;}
+        std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
+        std::string getCmd() override {return cmd;}
+        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        ~PanelForChangeEntrance() = default;
+}; 

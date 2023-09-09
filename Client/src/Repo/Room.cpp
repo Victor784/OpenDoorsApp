@@ -76,6 +76,19 @@ void Room::removeEntrance(unsigned int entranceId)
     }
 }
 
+void Room::changeEntrance(unsigned int id, EntranceType newType, Position newPos )
+{
+    for (int i = 0; i< entrances.size(); i++)
+    {
+        if((entrances[i]).getId() == id)
+        {
+            entrances[i].setType(newType);
+            entrances[i].setPosition(newPos);
+            entrances[i].setStatus(Status::Closed);
+        }
+    }
+}
+
 std::ostream& operator<< (std::ostream &os, const  Room &room)
 {
     os << "Room ID: " << room.id << " | " << "Room name: " << room.name << " | " 

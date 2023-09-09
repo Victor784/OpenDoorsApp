@@ -51,6 +51,7 @@ class Entrance
         Position position;
         Status status;
 };
+
 namespace utils{
 std::string toString(EntranceType type);
 std::string toString(Position position);

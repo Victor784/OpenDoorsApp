@@ -35,7 +35,9 @@ Status Entrance::getStatus() const
 
 void Entrance::setType(EntranceType newType)
 {
+    std::cout << "\n SetType before type : " << utils::toString(newType) << '\n';
     type = newType;
+    std::cout << "\nSetType type : " << utils::toString(type) << '\n';
 }
         
 void Entrance::setPosition(Position newPosition)

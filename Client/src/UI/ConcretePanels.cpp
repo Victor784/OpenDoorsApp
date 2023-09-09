@@ -507,3 +507,121 @@ IPanel* PanelForDeleteEntrance::exec()
             }
             
         }
+
+IPanel* PanelForChangeEntrance::exec()
+        {
+             std::cout << "-----------" << nameOfPanel << "-----------" << '\n';
+            
+            std::cout << "Enter the id of  the entrance  you want to change: ";
+            unsigned int id;
+            std::cin >> id;
+            bool found = false;
+            for (const auto& room : house->getRooms())
+            {
+                for(auto entrace : room.getEntrances())
+                    {
+                        if(entrace.getId() == id)
+                            found = true;
+                    }
+            }
+            if(!found)
+            {
+                std::cout << "Id not found..\n";
+                return this;
+            }
+                
+            std::cout << "Select type of entrance: \n";
+            std::cout << " 1. Window\n";
+            std::cout << " 2. Foldable window\n";
+            std::cout << " 3. Door\n";
+            std::cout << " 4. Foldable door\n";
+            int type;
+            std::cin>> type;
+            EntranceType enType;
+            switch (type) {
+                case 1:
+                    enType = EntranceType::Window;
+                    break;
+                case 2:
+                    enType = EntranceType::RabatableWindow;
+                    break;
+                case 3:
+                    enType = EntranceType::Door;
+                    break;
+                case 4:
+                    enType = EntranceType::RabatableDoor;
+                    break;
+                default:
+                    {
+                        std::cout << "\nInvalid choice...\n";
+                        return this;
+                    }
+            }
+            std::cout << "Select position of entrance: \n";
+            std::cout << " 1. East\n";
+            std::cout << " 2. North\n";
+            std::cout << " 3. South\n";
+            std::cout << " 4. West\n";
+            int pos;
+            std::cin>> pos;
+            Position position;
+            switch (pos) {
+                case 1:
+                    position = Position::East;
+                    break;
+                case 2:
+                    position = Position::North;
+                    break;
+                case 3:
+                    position = Position::South;
+                    break;
+                case 4:
+                    position = Position::West;
+                    break;
+                default:
+                    {
+                        std::cout << "\nInvalid choice...\n";
+                        return this;
+                    }
+            }
+            std::cout << display;
+            int option;
+            std::cin >> option;
+            if(option >= availablePanels.size()) //a lso check if the option is of type int
+            {
+                std::cout << "Invalid input..\n";
+                return availablePanels[0]; // all panels have an exit / back option on the 0th position
+            }
+            else
+            {   
+                if(option == 1)
+                {
+                    for (const auto& room : house->getRooms())
+                    {
+                        for(auto entrace : room.getEntrances())
+                            {
+                                if(entrace.getId() == id)
+                                    std::cout << "\n ChangeEntrancePanel before type : " << utils::toString(entrace.getType()) << '\n';
+
+                            }
+                    }
+                    house->changeEntrance(id,enType, position);
+                     for (const auto& room : house->getRooms())
+                    {
+                        for(auto entrace : room.getEntrances())
+                            {
+                                if(entrace.getId() == id)
+                                    std::cout << "\n ChangeEntrancePanel after type : " << utils::toString(entrace.getType()) << '\n';
+
+                            }
+                    }
+                    cmd = "{change-entrance, id:" + std::to_string(id) +",new-type:" + utils::toString(enType) + ",new-position:" + utils::toString(position) + "}";
+                    std::cout << "\n Entrance changed successfully..\n";
+                }
+                else if(option == 0){
+                    std::cout << "\nOperation aborted..\n";
+                }
+                return availablePanels[option];
+            }
+            
+        }

@@ -120,9 +120,7 @@ void House::changeEntrance(unsigned int entranceId , EntranceType newType, Posit
         {
             if(entranceId == entrance.getId())
             {
-                entrance.setType(newType);
-                entrance.setPosition(newPosition);
-                entrance.setStatus(Status::Closed);
+               room.changeEntrance(entranceId,newType, newPosition);
             }
         }
     }
