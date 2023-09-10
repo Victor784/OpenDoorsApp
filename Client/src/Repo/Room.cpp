@@ -2,7 +2,7 @@
 
 unsigned int Room::roomIdGenerator = 0;
 
-Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance> entranceVal)
+Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance>& entranceVal)
 {
     id = ++roomIdGenerator;
     name = nameVal;
@@ -53,7 +53,7 @@ void Room::setEntrances(std::vector<Entrance> entranceVect)
     entrances = entranceVect;
 }
 
-void Room::addEntrance(Entrance newEntrance)
+void Room::addEntrance(Entrance& newEntrance)
 {
     entrances.push_back(newEntrance);
 }
@@ -84,9 +84,20 @@ void Room::changeEntrance(unsigned int id, EntranceType newType, Position newPos
         {
             entrances[i].setType(newType);
             entrances[i].setPosition(newPos);
-            entrances[i].setStatus(Status::Closed);
+            entrances[i].setStatus(Status::Open); // when changing an entrance details , auto change the status to open
         }
     }
+}
+
+void Room::changeEntranceStatus(int entranceId)
+{
+     for(Entrance& entrance : entrances)
+     {
+        if(entrance.getId() == entranceId)
+        {
+            entrance.switchStatus();
+        }
+     }
 }
 
 std::ostream& operator<< (std::ostream &os, const  Room &room)

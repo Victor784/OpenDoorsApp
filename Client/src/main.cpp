@@ -19,10 +19,13 @@ int main()
 
     Entrance entrance4(EntranceType::Door, Position::South, Status::Closed);
 
+    std::cout << "[DEBUG] Entrance 1 before anything : " << &entrance1 << '\n';
 
     std::vector<Entrance> vect;
     vect.push_back(entrance1);
     vect.push_back(entrance2);
+
+    std::cout << "[DEBUG] Entrance 1 in helper vector : " << vect[0] << '\n';
 
     std::vector<Entrance> vect2;
     vect2.push_back(entrance3);

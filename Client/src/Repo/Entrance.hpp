@@ -39,7 +39,8 @@ class Entrance
 
         void setType(EntranceType newType);
         void setPosition(Position newPosition);
-        void setStatus(Status newStatus);
+        void setStatus(Status newStatus); // initially used for everything , now used only for when a room is changed
+        void switchStatus(); // using for switching between the statuses of an entrance
         
         friend std::ostream& operator<<(std::ostream& os, const Entrance& en);
 

@@ -23,13 +23,13 @@ class House
     public:
         House();
         House(Address addresVal);
-        House(Address addresVal, std::vector<Room> roomsVect);
-        House(std::vector<Room> roomsVect);
+        House(Address addresVal, std::vector<Room>& roomsVect);
+        House(std::vector<Room>& roomsVect);
         ~House() = default;
 
-        unsigned int getId();
-        Address getAddress();
-        std::vector<Room> getRooms();
+        unsigned int getId() const;
+        Address getAddress() const;
+        std::vector<Room> getRooms() const;
 
         void setAddress(Address newAddress);
 
@@ -40,7 +40,7 @@ class House
 
         void setRooms(std::vector<Room> newRoomVect);
 
-        void addRoom(Room newRoom); //TODO: if you add rooms this way, you need to create them first, meaning that the lifetime of the objects is dependent on the exec() method
+        void addRoom(Room newRoom); //TODO: if you add rooms this way, you need to create them first, meaning that the lifetime of the objects is dependent on the exec() method, but there is copy made inside addRoom
         void removeRoom(unsigned int roomId);        
         void changeRoom(unsigned int roomId, std::string newName = "", std::string newLevel = "", std::vector<Entrance> newEntrances = {});
 
@@ -48,6 +48,7 @@ class House
         void changeEntrance(unsigned int entranceId , EntranceType newType, Position newPosition);
         void removeEntrance(unsigned int entranceId);
 
+        void changeEntranceStatus(unsigned int entranceId); 
         std::string toString();
 
     public:

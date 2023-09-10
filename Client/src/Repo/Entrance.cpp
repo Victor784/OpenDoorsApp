@@ -35,9 +35,7 @@ Status Entrance::getStatus() const
 
 void Entrance::setType(EntranceType newType)
 {
-    std::cout << "\n SetType before type : " << utils::toString(newType) << '\n';
     type = newType;
-    std::cout << "\nSetType type : " << utils::toString(type) << '\n';
 }
         
 void Entrance::setPosition(Position newPosition)
@@ -48,6 +46,43 @@ void Entrance::setPosition(Position newPosition)
 void Entrance::setStatus(Status newStatus)
 {
     status = newStatus;
+}
+
+void Entrance::switchStatus()
+{
+    std::cout << "[DEBUG]Entrance before change" << utils::toString(status)<< '\n';
+    if(type == EntranceType::RabatableDoor || type == EntranceType::RabatableWindow)
+    {
+        switch (status) 
+        {
+            case Status::Closed:
+                status = Status::Folded;
+                break;
+            case Status::Folded:
+                status = Status::Open;
+                break;
+            case Status::Open:
+                status = Status::Closed;
+                break;
+            default:
+                status = Status::Open;
+        }
+    }
+    else // Entrance type is door or window
+    {
+         switch (status) 
+        {
+            case Status::Closed:
+                status = Status::Open;
+                break;
+            case Status::Open:
+                status = Status::Closed;
+                break; 
+            default:
+                status = Status::Open;
+        }
+    }
+    std::cout << "[DEBUG]Entrance after change" << utils::toString(status)<< '\n';
 }
 
 // TODO: template function toString would be a good idea

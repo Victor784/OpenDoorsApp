@@ -14,30 +14,30 @@ House::House(Address addresVal)
     addres = addresVal;
 }
 
-House::House(Address addresVal, std::vector<Room> roomsVect)
+House::House(Address addresVal, std::vector<Room>& roomsVect)
 {
     id = ++houseIdGenerator;
     addres = addresVal;
     rooms = roomsVect;
 }
 
-House::House(std::vector<Room> roomsVect)
+House::House(std::vector<Room>& roomsVect)
 {
     id = ++houseIdGenerator;
     rooms = roomsVect;
 }
 
-unsigned int House::getId()
+unsigned int House::getId() const
 {
     return id;
 }
         
-Address House::getAddress()
+Address House::getAddress() const
 {
     return addres;
 }
         
-std::vector<Room> House::getRooms()
+std::vector<Room> House::getRooms() const
 {
     return rooms;
 }
@@ -135,6 +135,23 @@ void House::removeEntrance(unsigned int entranceId)
             if(entranceId == entrance.getId())
             {
                 room.removeEntrance(entranceId);
+            }
+        }
+    }
+}
+
+void House::changeEntranceStatus(unsigned int entranceId)
+{
+    for(auto& room : rooms)
+    {
+        for(auto& entrance : room.getEntrances())
+        {
+            if(entranceId == entrance.getId())
+            {
+                std::cout << "[DEBUG] House Entrance in change entrance func before  " << entrance << '\n';
+                // entrance.switchStatus();
+                room.changeEntranceStatus(entranceId);
+                std::cout << "[DEBUG] House Entrance in change entrance func after " << entrance << '\n';
             }
         }
     }

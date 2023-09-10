@@ -7,7 +7,7 @@ class Room
 {
     public:
         Room() = delete;
-        Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance> entranceVect);
+        Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance>& entranceVect);
         Room(std::string nameVal, unsigned int levelVal);
         ~Room() = default;
 
@@ -20,9 +20,12 @@ class Room
         void setLevel(unsigned int levelVal);
         void setEntrances(std::vector<Entrance> entranceVect);
 
-        void addEntrance(Entrance newEntrance);
+        void addEntrance(Entrance &newEntrance);
         void removeEntrance(unsigned int entranceId);
         void changeEntrance(unsigned int id, EntranceType newType, Position newPos );
+
+        void changeEntranceStatus(int entranceId);
+
         friend std::ostream& operator<< (std::ostream& os, const Room& room);
         void operator=(const Room& other);
     public:
