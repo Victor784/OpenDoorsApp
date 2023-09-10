@@ -148,10 +148,8 @@ void House::changeEntranceStatus(unsigned int entranceId)
         {
             if(entranceId == entrance.getId())
             {
-                std::cout << "[DEBUG] House Entrance in change entrance func before  " << entrance << '\n';
                 // entrance.switchStatus();
                 room.changeEntranceStatus(entranceId);
-                std::cout << "[DEBUG] House Entrance in change entrance func after " << entrance << '\n';
             }
         }
     }

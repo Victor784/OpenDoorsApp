@@ -8,18 +8,19 @@
 class Client{
     private:
         IConnection& connection;
-        // Ui& ui;
+        UI ui;
         House house;
     public:
-        // Client(IConnection& conn, Ui& userInterface, House houseVal) 
-        // : connection(conn) , ui(userInterface), house(houseVal) {}
+        //  Client(IConnection& conn, UI& userInterface, House houseVal) 
+        //  : connection(conn) , ui(userInterface), house(houseVal) {}
         
-         Client(IConnection& conn, House houseVal) 
-        : connection(conn), house(houseVal) {}
+        Client(IConnection& conn , House houseVal) 
+        : connection(conn) ,house(houseVal) {}
         IConnection& getConnection() { return connection;}
         // Ui& getUi() {return ui;}
         House& getHouse(){
             return  house;}
+        void run();
          ~Client() = default;
         
 

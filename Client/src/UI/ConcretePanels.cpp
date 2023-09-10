@@ -54,83 +54,8 @@ IPanel* PanelForListAllEntrances::exec()
             else 
             {
                 // case for changing the status
-                std::cout << "[DEBUG]Entrance Status before " << utils::toString(repoPtr->getRooms()[0].getEntrances()[0].getStatus()) << '\n';
                 
                 repoPtr->changeEntranceStatus(optionEntranceIdMap[option-1]);
-
-                std::cout << "[DEBUG]Entrance Status after " << utils::toString(repoPtr->getRooms()[0].getEntrances()[0].getStatus()) << '\n';
-                // Entrance entrancePtrV = auxEntranceVect[option -1];
-                // std::cout << "[DEBUG]Copy ref: " << &entrancePtrV << '\n';
-                // std::cout << "[DEBUG]actual obj ref: " << &auxEntranceVect[option -1] << '\n';
-                // if(entrancePtrV.getType() == EntranceType::RabatableDoor || 
-                //     entrancePtrV.getType() == EntranceType::RabatableWindow)
-                //     {
-                //         std::cout << "Choose new entrance state : \n";
-                //         if(entrancePtrV.getStatus() == Status::Closed)
-                //         {
-                //             std::cout << "1. Folded\n 2. Open\n";
-                //             int option;
-                //             std::cin >> option;
-                //             switch (option) {
-                //                 case 1:
-                //                     entrancePtrV.setStatus(Status::Folded);
-                //                     // TODO: send msg to Server in this case
-                //                 case 2:
-                //                     entrancePtrV.setStatus(Status::Open);
-                //                     // TODO: send msg to Server in this case
-                //                 default:
-                //                     std::cout << "Invalid choice, no action was taken\n";
-                //             }
-                //         }
-                //         else if(entrancePtrV.getStatus() == Status::Folded)
-                //         {
-                //             std::cout << "1. Closed\n 2. Open\n";
-                //             int option;
-                //             std::cin >> option;
-                //             switch (option) {
-                //                 case 1:
-                //                     entrancePtrV.setStatus(Status::Closed);
-                //                     // TODO: send msg to Server in this case
-                //                 case 2:
-                //                     entrancePtrV.setStatus(Status::Open);
-                //                     // TODO: send msg to Server in this case
-                //                 default:
-                //                     std::cout << "Invalid choice, no action was taken\n";
-                //             }
-                //         }
-                //         else { //open state
-                //             std::cout << "1. Folded\n 2. Closed\n";
-                //             int option;
-                //             std::cin >> option;
-                //             switch (option) {
-                //                 case 1:
-                //                     entrancePtrV.setStatus(Status::Folded);
-                //                     // TODO: send msg to Server in this case
-                //                 case 2:
-                //                     entrancePtrV.setStatus(Status::Closed);
-                //                     // TODO: send msg to Server in this case
-                //                 default:
-                //                     std::cout << "Invalid choice, no action was taken\n";
-                //                 }
-                //             }
-                //     }
-                //     else 
-                //     {
-                //         if(entrancePtrV.getStatus() == Status::Closed)
-                //         {
-                //             // TODO: send msg to Server in this case
-                //             entrancePtrV.setStatus(Status::Open);
-                //             std::cout << "[DEBUG]Entrance Status after " << utils::toString(auxEntranceVect[option -1].getStatus()) << '\n';
-
-                //         }    
-                //         else
-                //         {
-                //             // TODO: send msg to Server in this case
-                //             entrancePtrV.setStatus(Status::Closed);
-                //             std::cout << "[DEBUG]Entrance Status after " << utils::toString(auxEntranceVect[option -1].getStatus()) << '\n';
-
-                //         }        
-                //     }
             
         }
         return this;

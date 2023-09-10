@@ -50,7 +50,6 @@ void Entrance::setStatus(Status newStatus)
 
 void Entrance::switchStatus()
 {
-    std::cout << "[DEBUG]Entrance before change" << utils::toString(status)<< '\n';
     if(type == EntranceType::RabatableDoor || type == EntranceType::RabatableWindow)
     {
         switch (status) 
@@ -82,7 +81,6 @@ void Entrance::switchStatus()
                 status = Status::Open;
         }
     }
-    std::cout << "[DEBUG]Entrance after change" << utils::toString(status)<< '\n';
 }
 
 // TODO: template function toString would be a good idea
