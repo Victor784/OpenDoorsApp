@@ -54,10 +54,9 @@ IPanel* PanelForListAllEntrances::exec()
             else 
             {
                 // case for changing the status
-                
                 repoPtr->changeEntranceStatus(optionEntranceIdMap[option-1]);
-            
-        }
+                cmd = "{switch-status, entrance-id:" + std::to_string(optionEntranceIdMap[option-1]) + "}";
+            }
         return this;
         }
 

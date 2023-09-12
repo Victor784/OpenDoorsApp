@@ -2,7 +2,12 @@
 
 #include"Client.hpp"
 
-
+// inline void Client::sendCmd(std::string cmd)
+// {
+//     std::cout << "From sendCmd of Client : " << cmd << '\n';
+//     connection.connect();
+//     connection.write(cmd);
+// }
 
 
 void Client::run()
@@ -48,7 +53,7 @@ void Client::run()
 
     PanelForChangeHouseLayout PanelChangeHouseLayout("House layout", " 1.House details\n 2.Rooms\n 3.Entrances\n 0.Back\n", false, "", &house);
 
-    PanelForListAllEntrances PanelListAllEntrances("All entrances " , " 0.Back\n" , false , "" , &house);
+    PanelForListAllEntrances PanelListAllEntrances("All entrances" , " 0.Back\n" , false , "" , &house);
 
     PanelForChangeHouseDetails PanelForChangeHouseDetails("House details" , " 1.Change country\n 2.Change city\n 3.Change street\n 4.Change nr\n 0.Back\n", false, "" , &house );
 
@@ -171,5 +176,12 @@ void Client::run()
     ui.cmd = "";
     ui.house = &house;
 
-    ui.run();
+    while(ui.currentPanel->getNameOfPanel() != "Exit Panel")
+    {
+        std::cout << "from Client : " << ui.cmd << '\n';
+        connection.write(ui.cmd);
+        ui.cmd = "";
+        ui.run();
+    }
+    
 }

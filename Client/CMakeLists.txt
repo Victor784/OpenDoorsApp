@@ -12,6 +12,7 @@ add_executable(Client
     src/Client/Client.cpp
     src/UI/Panel.hpp
     src/UI/Ui.hpp
+    src/UI/Ui.cpp
     src/UI/ConcretePanels.hpp
     src/UI/ConcretePanels.cpp
     src/Repo/Entrance.hpp

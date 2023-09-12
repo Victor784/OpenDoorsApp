@@ -5,22 +5,26 @@
 #include "../Repo/House.hpp"
 #include<iostream>
 
+
 class Client{
     private:
         IConnection& connection;
         UI ui;
         House house;
     public:
-        //  Client(IConnection& conn, UI& userInterface, House houseVal) 
-        //  : connection(conn) , ui(userInterface), house(houseVal) {}
-        
         Client(IConnection& conn , House houseVal) 
         : connection(conn) ,house(houseVal) {}
         IConnection& getConnection() { return connection;}
-        // Ui& getUi() {return ui;}
         House& getHouse(){
             return  house;}
         void run();
+        void sendCmd(std::string cmd)
+        {
+        std::cout << "From sendCmd of Client : " << cmd << '\n';
+        connection.connect();
+        connection.write(cmd);
+        }
+        // Client should have a func that uses the connection to receive all house data from server on start up
          ~Client() = default;
         
 

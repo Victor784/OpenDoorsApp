@@ -9,7 +9,7 @@
 
 int main()
 {   
-    Pipe p1;
+    Pipe p1("../../../test.txt" , "");
     Connection conn(p1);
     House house;
 

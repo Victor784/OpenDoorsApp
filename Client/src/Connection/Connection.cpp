@@ -2,6 +2,7 @@
 
 void Connection::write(std::string message)
         {
+            std::cout << "connection : " << message << '\n'; 
             std::ofstream outPipe(pipeName.getOutgoingPipe());
             outPipe << message;
             outPipe.close();
