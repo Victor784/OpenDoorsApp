@@ -14,10 +14,10 @@ void write(std::string message)
 std::string read()
 {
     std::string messageFromClient;
-    std::ifstream ifs ("../ClientServerPipe.txt");
-
+    std::ifstream ifs ("../test.txt");
     if(ifs.is_open()) 
     {
+        std::cout << "file is linked to server\n";
          while(std::getline(ifs, messageFromClient)) 
          {
             ifs >> messageFromClient;
@@ -31,7 +31,7 @@ int main()
     while(true)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-        write("ServertInput");
+        //write("ServertInput");
         std::cout << "from pipe  "<< read();
     }
 }
