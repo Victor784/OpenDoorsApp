@@ -1,13 +1,15 @@
 #include "Connection.hpp"
 
-void Connection::write(std::string message)
+namespace connection
+{
+void Connection::write_(std::string message)
         {
             std::cout << "connection : " << message << '\n'; 
             std::ofstream outPipe(pipeName.getOutgoingPipe());
             outPipe << message;
             outPipe.close();
         }
-std::string Connection::read()
+std::string Connection::read_()
         {
             std::string messageFromServer;
             std::ifstream inPipe(pipeName.getIncomingPipe());
@@ -21,10 +23,11 @@ std::string Connection::read()
             }
         return messageFromServer;
         }
-void Connection::connect() {
+void Connection::connect_() {
     // nothing to do at the moment
 } 
 
-void Connection::disconnect(){
+void Connection::disconnect_(){
     // nothing to do at the moment
+}
 }

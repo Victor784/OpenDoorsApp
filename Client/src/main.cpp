@@ -1,5 +1,7 @@
 #include"../src/Connection/Connection.hpp"
 #include "../src/Client/Client.hpp"
+#include "../src/Connection/WSConnection.hpp"
+#include "../src/Logger/Logger.hpp"
 
 
 
@@ -9,16 +11,19 @@
 #include <thread>
 #include <vcruntime_typeinfo.h>
 #include <vector>
+ 
 
 int main()
 {   
-    Pipe p1("../../../test.txt" , "");
-    Connection conn(p1);
+
+    //Pipe p1("../../../test.txt" , "");
+    connection::WSConnection conn;
     House house;
 
-    Client client (conn, house);
+    connection::Client client(conn, house);
 
     client.run();
     return 0;
 
 }
+

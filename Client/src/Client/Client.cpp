@@ -9,6 +9,9 @@
 //     connection.write(cmd);
 // }
 
+namespace connection {
+
+
 
 void Client::run()
 {
@@ -176,12 +179,18 @@ void Client::run()
     ui.cmd = "";
     ui.house = &house;
 
+
+
+
     while(ui.currentPanel->getNameOfPanel() != "Exit Panel")
     {
-        std::cout << "from Client : " << ui.cmd << '\n';
-        connection.write(ui.cmd);
+        std::cout << "From client(before connection.write) : " << ui.cmd << '\n'; 
+        connection.connect_();
+        connection.write_(ui.cmd);
+        connection.disconnect_();
         ui.cmd = "";
         ui.run();
     }
     
+}
 }

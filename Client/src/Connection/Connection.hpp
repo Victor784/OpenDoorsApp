@@ -5,6 +5,8 @@
 #include<fstream>
 #include "IConnection.hpp"
 
+namespace connection
+{
 struct Pipe{
     
         Pipe() = default;
@@ -50,10 +52,11 @@ class Connection : public IConnection{
         Connection() = default;
         ~Connection() = default;
 
-        void connect() override;
-        void disconnect() override ;
-        std::string read() override;
-        void write(std::string message) override;
+        void connect_() override;
+        void disconnect_() override ;
+        std::string read_() override;
+        void write_(std::string message) override;
         
     
 };
+}

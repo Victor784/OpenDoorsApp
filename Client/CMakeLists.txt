@@ -5,7 +5,7 @@ project(CLIENT
     DESCRIPTION "MiniClient"
     LANGUAGES CXX)
 
-add_executable(Client
+add_executable(Client WIN32
     src/Connection/Connection.hpp
     src/Connection/Connection.cpp
     src/Client/Client.hpp
@@ -21,6 +21,21 @@ add_executable(Client
     src/Repo/Room.cpp
     src/Repo/House.hpp
     src/Repo/House.cpp
-    src/main.cpp)
+    utils/utils.hpp
+    utils/utils.cpp
+    src/Logger/logger.hpp
+    src/Logger/logger.cpp
+    src/Connection/WSConnection.hpp
+    src/Connection/WSConnection.cpp
+    src/main.cpp
+    
+    )
+
+if(WIN32)
+    target_link_libraries(Client wsock32 ws2_32)
+endif()
+
+set_target_properties(Client PROPERTIES WIN32_EXECUTABLE FALSE)
+
 
 target_compile_features(Client PRIVATE cxx_std_20)

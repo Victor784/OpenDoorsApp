@@ -5,6 +5,8 @@
 #include "../Repo/House.hpp"
 #include<iostream>
 
+namespace connection
+{
 
 class Client{
     private:
@@ -20,12 +22,14 @@ class Client{
         void run();
         void sendCmd(std::string cmd)
         {
-        std::cout << "From sendCmd of Client : " << cmd << '\n';
-        connection.connect();
-        connection.write(cmd);
+        // std::cout << "From sendCmd of Client : " << cmd << '\n';
+        connection.connect_();
+        connection.write_(cmd);
+        connection.disconnect_();
         }
         // Client should have a func that uses the connection to receive all house data from server on start up
          ~Client() = default;
         
 
 };
+}
