@@ -184,13 +184,14 @@ void Client::run()
 
     while(ui.currentPanel->getNameOfPanel() != "Exit Panel")
     {
-        std::cout << "From client(before connection.write) : " << ui.cmd << '\n'; 
         connection.connect_();
+        std::cout << "From client.run() - ui.cmd : " << ui.cmd << '\n';
         connection.write_(ui.cmd);
-        connection.disconnect_();
+
         ui.cmd = "";
         ui.run();
     }
+    connection.disconnect_();
     
 }
 }

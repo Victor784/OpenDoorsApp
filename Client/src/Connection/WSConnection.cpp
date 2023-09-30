@@ -17,27 +17,42 @@ WSConnection::WSConnection()
     wsaerr = WSAStartup(wVersionRequested,  &wsadata);
     if(wsaerr != 0)
     {
-       logger.log("Winsock dll not found..");
+       logger.log("WSConnection() - Winsock dll not found..");
     }
     else {
-        logger.log("Winsock dll found ");
-        logger.log("Status: "); 
+        logger.log("WSConnection() - Winsock dll found ");
+        logger.log("WSConnection() - Status: "); 
         logger.log(wsadata.szSystemStatus);  
     }
 }
 
 void WSConnection::connect_()
 {
-     Logger& logger = Logger::getInstance();
+    
+    Logger& logger = Logger::getInstance();
+    WSADATA wsadata;
+    int wsaerr;
+    WORD wVersionRequested = MAKEWORD(2, 2);
+    wsaerr = WSAStartup(wVersionRequested,  &wsadata);
+    if(wsaerr != 0)
+    {
+       logger.log("connect_() - Winsock dll not found..");
+    }
+    else {
+        logger.log("connect_() - Winsock dll found ");
+        logger.log("connect_() - Status: "); 
+        logger.log(wsadata.szSystemStatus); 
+
+    }
     clientScoket = INVALID_SOCKET;
     clientScoket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if(clientScoket == INVALID_SOCKET)
     {
-        logger.log("Error at socket(): " + getErrorAsString(WSAGetLastError()));
+        logger.log("connect_() - Error at socket(): " + getErrorAsString(WSAGetLastError()));
         WSACleanup();
     }
     else {
-        logger.log("Socket() is OK!"); 
+        logger.log("connect_() - Socket() is OK!"); 
     }
      //socket setup continuation
     sockaddr_in clientService;
@@ -47,12 +62,12 @@ void WSConnection::connect_()
     // socket binding / connection
     if(connect(clientScoket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR)
     {
-        logger.log("Client connect() - Failed to connect err: " + getErrorAsString(WSAGetLastError()));
+        logger.log("connect_() - Client connect() - Failed to connect err: " + getErrorAsString(WSAGetLastError()));
         WSACleanup(); // Because of WSACLeanup here all other operations will fail , As WSAStartup effects will be negated by this
     }
     else {
-        logger.log( "Client connect() is OK!");
-        logger.log("Can start sending and recieveing data..");
+        logger.log( "connect_() - Client connect() is OK!");
+        logger.log("connect_() - Can start sending and recieveing data..");
     }
 }
 
@@ -61,11 +76,12 @@ void WSConnection::write_(std::string message)
     Logger& logger = Logger::getInstance();
     if(clientScoket== SOCKET_ERROR)
     {
-        logger.log("Client socket error, cannot send message..");
+        logger.log("write_() - Client socket error, cannot send message..");
     }
     else 
     {
-         #define DEFAULT_BUFLEN 512
+        logger.log(message);
+        #define DEFAULT_BUFLEN 512
         int recvbuflen = DEFAULT_BUFLEN;
 
         const char *sendbuf = message.c_str();
@@ -76,19 +92,19 @@ void WSConnection::write_(std::string message)
         // Send an initial buffer
         iResult = send(clientScoket, sendbuf, (int) strlen(sendbuf), 0);
         if (iResult == SOCKET_ERROR) {
-            logger.log("send failed:" +  getErrorAsString(WSAGetLastError()));
+            logger.log("write_() - send failed:" +  getErrorAsString(WSAGetLastError()));
             closesocket(clientScoket);
             WSACleanup();
         }
 
-        logger.log("Bytes Sent:" + std::to_string((long)iResult));
+        logger.log("write_() - Bytes Sent:" + std::to_string((long)iResult));
 
         // shutdown the connection for sending since no more data will be sent
         // the client can still use the ConnectSocket for receiving data
         iResult = shutdown(clientScoket, SD_SEND);
         if (iResult == SOCKET_ERROR) 
         {
-            logger.log("shutdown failed:" + getErrorAsString(WSAGetLastError()));
+            logger.log("write_() - shutdown failed:" + getErrorAsString(WSAGetLastError()));
             closesocket(clientScoket);
             WSACleanup();
         }
@@ -101,7 +117,7 @@ std::string WSConnection::read_()
     Logger& logger = Logger::getInstance();
     if(clientScoket== SOCKET_ERROR)
     {
-        logger.log("Client socket error, cannot recieve message.");
+        logger.log("read_() - Client socket error, cannot recieve message.");
         return "error";
     }
     else {
@@ -115,16 +131,16 @@ std::string WSConnection::read_()
     int iResult = recv(clientScoket, recvbuf, recvbuflen, 0);
         if (iResult > 0)
         {
-            logger.log("Bytes received:" + std::to_string(iResult));
-            logger.log("Message from server is: ");
+            logger.log("read_() - Bytes received:" + std::to_string(iResult));
+            logger.log("read_() - Message from server is: ");
             logger.log(recvbuf);
             return recvbuf;
             // message should be passed to client here
         }
         else if (iResult == 0)
-            logger.log("Connection closed");
+            logger.log("read_() - Connection closed");
         else
-            logger.log("recv failed:" + getErrorAsString(WSAGetLastError()));
+            logger.log("read_() - recv failed:" + getErrorAsString(WSAGetLastError()));
     return "error";
     }
 }
@@ -133,7 +149,7 @@ void WSConnection::disconnect_()
 {
     Logger& logger = Logger::getInstance();
     closesocket(clientScoket);
-    logger.log("Connection closed");
+    logger.log("disconnect_() - Connection closed");
     WSACleanup();
 }
 
