@@ -4,13 +4,13 @@
 
 
 
-
 #include <chrono>
 #include <memory>
 #include <thread>
 #include <vcruntime_typeinfo.h>
 #include <vector>
  
+#include <sqlite3.h> // this works no fixes needed
 
 int main()
 {   
