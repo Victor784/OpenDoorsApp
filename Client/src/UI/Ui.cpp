@@ -6,6 +6,7 @@ void UI::run()
             // {
                 if(currentPanel->isFinalPanel())
                 {
+                    std::cout << "\n DEBUG: " << currentPanel->getNameOfPanel() << '\n';
                     IPanel* aux = currentPanel->exec();
                     if(aux->getNameOfPanel() == "Confirmation Panel")
                     {  
@@ -21,10 +22,13 @@ void UI::run()
 
                 }
                 else 
-                {
-                    
+                { 
                     IPanel* aux = currentPanel->exec();
                     if(aux->getNameOfPanel() == "All entrances")
+                    {
+                        cmd = currentPanel->getCmd();
+                    }
+                    else if(aux->getNameOfPanel() == "House details")
                     {
                         cmd = currentPanel->getCmd();
                     }

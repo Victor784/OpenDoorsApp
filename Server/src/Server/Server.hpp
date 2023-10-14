@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include "../Connection/IConnection.hpp"
 #include "../Connection/WSConnection.hpp"
 
@@ -31,8 +32,10 @@ class Server{
         void run();
         void process (std::string message);
         std::string trim(std::string message);
+        std::vector<std::string> decodeMessage(std::string message);
+        bool executeCommand(std::vector<std::string> command);
         void createDataBase();
-        void executeCommand(std::string message);
+        //void executeCommand(std::string message);
 
         //DB elem control
         void switchStateForEntrance(int id);

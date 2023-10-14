@@ -104,7 +104,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                             std::string newName;
                             std::cin >> newName; //TOOD validate input
                             house->setAddressCountry(newName);
-                            //TODO send to server updata request
+                            cmd = "{change-country," + newName + "}";
                             break;
                         }
                     case 2:
@@ -113,7 +113,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                             std::string newName;
                             std::cin >> newName; //TOOD validate input
                             house->setAddressCity(newName);
-                            //TODO send to server updata request
+                            cmd = "{change-city," + newName + "}";
                             break;
                         }
                     case 3:
@@ -122,7 +122,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                             std::string newName;
                             std::cin >> newName; //TOOD validate input
                             house->setAddressStreet(newName);
-                            //TODO send to server updata request
+                            cmd = "{change-street," + newName + "}";
                             break;
                         }
                     case 4:
@@ -131,7 +131,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                             unsigned int nr;
                             std::cin >> nr; //TOOD validate input
                             house->setAddressNr(nr); 
-                            //TODO send to server updata request
+                            cmd = "{change-nr," + std::to_string(nr) + "}";
                             break;
                         }
                     default:
