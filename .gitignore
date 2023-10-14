@@ -1,0 +1,8 @@
+*.JPG
+*.vcxproj
+Debug/
+CMakeFiles/
+*.filters
+*.sln
+CMakeCache.txt
+*.cmake 
