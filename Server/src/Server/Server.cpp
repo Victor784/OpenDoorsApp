@@ -2,18 +2,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-enum stringHash
-{
-    switchStatus,
-    addEntrance,
-    deleteEntrance,
-    changeEntrance,
-    addRoom,
-    changeRoom,
-    deleteRoom,
-
-};
+#include "../../utils/utils.hpp"
 
 void Server::run()
 {
@@ -76,12 +65,31 @@ std::vector<std::string> Server::decodeMessage(std::string message)
     return decodedMessage;
 }
 
+
+
+
+
 bool Server::executeCommand(std::vector<std::string> command)
 {
-    //std::string switch_status= "switch-status";
-    //switch(command[0])
-    //{
-     //   case switch_status:
+    switch(convertStringToEnum(command[0]))
+    {
+        case switchStatus:
+            switchStateForEntrance(std::stoul(command[1])); // TODO: implicit convertion from unsigned long to unsigned int data loss risk, does it matter?
+            break;
+        //case addEntrance:
+
+    //     case addEntrance:
+    //         void addEntrance(), EntranceType type, Position position);
+    // case deleteEntrance:
+    // case changeEntrance:
+    // case addRoom:
+    // case changeRoom:
+    // case deleteRoom:
+    // case changeCountry:
+    // case changeCity:
+    // case changeStreet:
+    // case changeNr:
+    // default:
 
     //}
     return false;

@@ -22,3 +22,29 @@ namespace logging {
      }
 
 }
+
+stringHash convertStringToEnum(std::string str)
+{
+     if(str == "switch-status")
+          return switchStatus;
+     if(str == "add-entrance")
+          return addEntrance;
+     if(str == "delete-entrance")
+          return deleteEntrance;
+     if(str == "change-entrance")
+          return changeEntrance;
+     if(str == "add-room")
+          return addRoom;
+     if(str == "change-room")
+          return changeRoom;
+     if(str == "delete-room")
+          return deleteRoom;
+     if(str == "change-country")
+          return changeCountry;
+     if(str == "change-city")
+          return changeCity;
+     if(str == "change-street")
+          return changeStreet;
+     if(str == "change-nr")
+          return changeNr;
+}

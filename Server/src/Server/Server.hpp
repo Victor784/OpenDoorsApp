@@ -38,7 +38,7 @@ class Server{
         //void executeCommand(std::string message);
 
         //DB elem control
-        void switchStateForEntrance(int id);
+        void switchStateForEntrance(unsigned int id);
         void addEntrance(int roomId, EntranceType type, Position position);
         void deleteEntrance(int entranceId);
         void changeEntrance(int entranceId, EntranceType newType, Position newPosition);

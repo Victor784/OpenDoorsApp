@@ -9,3 +9,20 @@ namespace logging
     std::string getErrorAsString(int errorCode);
 
 }
+
+enum stringHash
+{
+    switchStatus,
+    addEntrance,
+    deleteEntrance,
+    changeEntrance,
+    addRoom,
+    changeRoom,
+    deleteRoom,
+    changeCountry,
+    changeCity,
+    changeStreet,
+    changeNr
+};
+
+stringHash convertStringToEnum(std::string str);
