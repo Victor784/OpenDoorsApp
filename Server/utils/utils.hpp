@@ -10,19 +10,45 @@ namespace logging
 
 }
 
-enum stringHash
+enum class EntranceType
 {
-    switchStatus,
-    addEntrance,
-    deleteEntrance,
-    changeEntrance,
-    addRoom,
-    changeRoom,
-    deleteRoom,
-    changeCountry,
-    changeCity,
-    changeStreet,
-    changeNr
+    Window,
+    RabatableWindow,
+    Door,
+    RabatableDoor
 };
 
-stringHash convertStringToEnum(std::string str);
+enum class Position
+{
+    East,
+    West,
+    South,
+    North
+};
+
+enum stringHash : int
+{
+    addEntranceEnum,
+    switchStatusEnum,
+    deleteEntranceEnum,
+    changeEntranceEnum,
+    addRoomEnum,
+    changeRoomEnum,
+    deleteRoomEnum,
+    changeCountryEnum,
+    changeCityEnum,
+    changeStreetEnum,
+    changeNrEnum
+};
+
+
+stringHash convertStringToCommand(std::string cmd);
+
+EntranceType convertStringToEntranceType(std::string type);
+
+Position convertStringToPosition(std::string pos);
+
+
+std::string toString(EntranceType type);
+
+std::string toString(Position position);

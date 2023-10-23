@@ -1,5 +1,6 @@
 #include "utils.hpp"
 #include <string>
+#include <iostream>
 
 namespace logging {
      std::string getErrorAsString(int errorCode)
@@ -23,28 +24,92 @@ namespace logging {
 
 }
 
-stringHash convertStringToEnum(std::string str)
+
+stringHash convertStringToCommand(std::string cmd)
 {
-     if(str == "switch-status")
-          return switchStatus;
-     if(str == "add-entrance")
-          return addEntrance;
-     if(str == "delete-entrance")
-          return deleteEntrance;
-     if(str == "change-entrance")
-          return changeEntrance;
-     if(str == "add-room")
-          return addRoom;
-     if(str == "change-room")
-          return changeRoom;
-     if(str == "delete-room")
-          return deleteRoom;
-     if(str == "change-country")
-          return changeCountry;
-     if(str == "change-city")
-          return changeCity;
-     if(str == "change-street")
-          return changeStreet;
-     if(str == "change-nr")
-          return changeNr;
+     std::cout << "[DEBUG] convertStringToCommand\n";
+     if(cmd == "switch-status")
+     {    
+          std::cout << "[DEBUG] stringHash::switchStatusEnum\n";
+          return stringHash::switchStatusEnum;
+         
+     }
+          
+     if(cmd == "add-entrance")
+          return stringHash::addEntranceEnum;
+     if(cmd == "delete-entrance")
+          return stringHash::deleteEntranceEnum;
+     if(cmd == "change-entrance")
+          return stringHash::changeEntranceEnum;
+     if(cmd == "add-room")
+          return stringHash::addRoomEnum;
+     if(cmd == "change-room")
+          return stringHash::changeRoomEnum;
+     if(cmd == "delete-room")
+          return stringHash::deleteRoomEnum;
+     if(cmd == "change-country")
+          return stringHash::changeCountryEnum;
+     if(cmd == "change-city")
+          return stringHash::changeCityEnum;
+     if(cmd == "change-street")
+          return stringHash::changeStreetEnum;
+     if(cmd == "change-nr")
+          return stringHash::changeNrEnum; 
+     std::cout << "[DEBUG] EXIT convertStringToCommand\n";
+}
+
+EntranceType convertStringToEntranceType(std::string type)
+{
+     if(type =="Window")
+          return EntranceType::Window;
+     if(type == "Rabatablewindow")
+          return EntranceType::RabatableWindow;
+     if(type == "Door")
+          return EntranceType::Door;
+     if(type == "Rabatabledoor")
+          return EntranceType::RabatableDoor;
+}
+
+Position convertStringToPosition(std::string pos)
+{
+      if(pos =="North")
+          return Position::North;
+     if(pos == "South")
+          return Position::South;
+     if(pos == "East")
+          return Position::East;
+     if(pos == "West")
+          return Position::West;
+}
+
+std::string toString(EntranceType type)
+{
+    switch (type) {
+        case EntranceType::Door:
+            return "Door";
+        case EntranceType::RabatableDoor:
+            return "Rabatable door";
+        case EntranceType::Window:
+            return "Window";
+        case EntranceType::RabatableWindow:
+            return "Rabatable window";
+        default:
+            return "";
+    }
+}
+
+std::string toString(Position position)
+{
+    switch (position) {
+        case Position::East:
+            return "East";
+        case Position::North:
+            return "North";
+        case Position::South:
+            return "South";
+        case Position::West:
+            return "West";
+        default:
+            return "";
+    }
 }

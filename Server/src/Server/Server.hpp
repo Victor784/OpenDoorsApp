@@ -3,24 +3,9 @@
 #include <iostream>
 #include <vector>
 #include "../Connection/IConnection.hpp"
-#include "../Connection/WSConnection.hpp"
+#include "../../utils/utils.hpp"
+#include "../../lib/sqlite3/sqlite3.h"
 
-
-enum class EntranceType
-{
-    Window,
-    RabatableWindow,
-    Door,
-    RabatableDoor
-};
-
-enum class Position
-{
-    East,
-    West,
-    South,
-    North
-};
 
 class Server{
     private:
@@ -42,7 +27,7 @@ class Server{
         void addEntrance(int roomId, EntranceType type, Position position);
         void deleteEntrance(int entranceId);
         void changeEntrance(int entranceId, EntranceType newType, Position newPosition);
-        void addRoom(std::string name, int level);
+        void addRoom(int id,std::string name, int level);
         void changeRoom(int roomId, std::string newName, int newLevel);
         void deleteRoom(int roomId);
         void changeAddressCountry(std::string newCountryName);
