@@ -28,21 +28,23 @@ enum class Position
 
 enum stringHash : int
 {
-    addEntranceEnum,
-    switchStatusEnum,
-    deleteEntranceEnum,
-    changeEntranceEnum,
-    addRoomEnum,
-    changeRoomEnum,
-    deleteRoomEnum,
-    changeCountryEnum,
-    changeCityEnum,
-    changeStreetEnum,
-    changeNrEnum
+    switchStatusEnum,   //0
+    addEntranceEnum,    //1
+    deleteEntranceEnum, //2
+    changeEntranceEnum, //3
+    addRoomEnum,        //4
+    changeRoomEnum,     //5
+    deleteRoomEnum,     //6
+    changeCountryEnum,  //7
+    changeCityEnum,     //8
+    changeStreetEnum,   //9
+    changeNrEnum        //10
 };
 
-
-stringHash convertStringToCommand(std::string cmd);
+class Test{
+    public:
+static stringHash convertStringToCommand(std::string cmd);
+};
 
 EntranceType convertStringToEntranceType(std::string type);
 

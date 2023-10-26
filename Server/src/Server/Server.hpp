@@ -20,8 +20,7 @@ class Server{
         std::vector<std::string> decodeMessage(std::string message);
         bool executeCommand(std::vector<std::string> command);
         void createDataBase();
-        //void executeCommand(std::string message);
-
+        std::string getValFromCommand(std::string partOfCommand);
         //DB elem control
         void switchStateForEntrance(unsigned int id);
         void addEntrance(int roomId, EntranceType type, Position position);

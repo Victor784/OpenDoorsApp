@@ -131,7 +131,7 @@ std::string WSConnection::acceptNewClientSocketAndRecieve()
     }
     else  
     {
-        #define DEFAULT_BUFLEN 50
+        #define DEFAULT_BUFLEN 100
 
     char recvbuf[DEFAULT_BUFLEN];
     int iResult, iSendResult;

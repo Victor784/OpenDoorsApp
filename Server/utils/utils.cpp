@@ -24,15 +24,11 @@ namespace logging {
 
 }
 
-
-stringHash convertStringToCommand(std::string cmd)
+stringHash Test::convertStringToCommand(std::string cmd)
 {
-     std::cout << "[DEBUG] convertStringToCommand\n";
      if(cmd == "switch-status")
      {    
-          std::cout << "[DEBUG] stringHash::switchStatusEnum\n";
           return stringHash::switchStatusEnum;
-         
      }
           
      if(cmd == "add-entrance")
@@ -72,7 +68,11 @@ EntranceType convertStringToEntranceType(std::string type)
 
 Position convertStringToPosition(std::string pos)
 {
-      if(pos =="North")
+     //TODO: Real bad ideea, you should have changed the way the connection works before doing this
+     if(pos[pos.size() -1] != 'h' || pos[pos.size() -1] != 't')
+          pos.pop_back();
+
+     if(pos =="North")
           return Position::North;
      if(pos == "South")
           return Position::South;
@@ -80,6 +80,7 @@ Position convertStringToPosition(std::string pos)
           return Position::East;
      if(pos == "West")
           return Position::West;
+ 
 }
 
 std::string toString(EntranceType type)

@@ -15,7 +15,6 @@ void Server::run()
     while(true)
     {
         std::string message = connection.acceptNewClientSocketAndRecieve();
-        std::cout << "[DEBUG] From Server::run() : " << message << '\n';
         process(message);
         //result from process will be a bool, send OK to client if return = true and NOT OK else
     }
@@ -28,11 +27,6 @@ void Server::process(std::string message)
     {
         std::vector<std::string> command = decodeMessage(trimmedMessage);
         bool responseFromServer = executeCommand(command);
-        std::cout << "Decoded message: \n";
-        for(std::string token : command)
-        {
-            std::cout << token << '\n';
-        } 
     }
     
 }
@@ -70,65 +64,91 @@ std::vector<std::string> Server::decodeMessage(std::string message)
     return decodedMessage;
 }
 
+std::string Server::getValFromCommand(std::string partOfCommand)
+{
+    bool flag = false;
+    std::string ret;
+    for(int i = 0 ; i < partOfCommand.size(); i++)
+    {
+        if(flag)
+        {
+            if(partOfCommand[i] == '0' || partOfCommand[i] == '1' || partOfCommand[i] == '2' ||
+               partOfCommand[i] == '3' || partOfCommand[i] == '4' || partOfCommand[i] == '5' || 
+               partOfCommand[i] == '6' || partOfCommand[i] == '7' || partOfCommand[i] == '8' || 
+               partOfCommand[i] == '9')
+                    ret.append(std::to_string(partOfCommand[i] - '0'));
+           
+            else
+                ret += partOfCommand[i];
+        }
+        else 
+        {
+            if (partOfCommand[i] == ':')
+                flag = true;
+        }
+    }
+    return ret;
+}
+
 bool Server::executeCommand(std::vector<std::string> command)
 {
-    std::cout << "[DEBUG] executeCommand()\n"; 
-    switch(convertStringToCommand(command[0]))
+   
+    const auto cmd = Test::convertStringToCommand(command[0]);
+    switch(cmd)
     {
-        std::cout << "[DEBUG] convertStringToCommand()\n"; 
         case switchStatusEnum:
         {
-            switchStateForEntrance(std::stoul(command[1])); // TODO: implicit convertion from unsigned long to unsigned int data loss risk, does it matter?
+            switchStateForEntrance(std::stoi(getValFromCommand(command[1]))); // TODO: implicit convertion from unsigned long to unsigned int data loss risk, does it matter?
             break;
-        }
+        } 
         case addEntranceEnum:
         {
-            addEntrance(std::stoi(command[1]), convertStringToEntranceType(command[2]), convertStringToPosition(command[3]));
+            addEntrance(std::stoi(getValFromCommand(command[1])), convertStringToEntranceType(getValFromCommand(command[2])), convertStringToPosition(getValFromCommand(command[3])));
             break;
         }
         case deleteEntranceEnum:
         {
-            deleteEntrance(std::stoi(command[1]));
+            deleteEntrance(std::stoi(getValFromCommand(command[1])));
             break;
         }
         case changeEntranceEnum:
         {
-            changeEntrance(std::stoi(command[1]), convertStringToEntranceType(command[2]), convertStringToPosition(command[3]));
+            changeEntrance(std::stoi(getValFromCommand(command[1])), convertStringToEntranceType(getValFromCommand(command[2])), convertStringToPosition(getValFromCommand(command[3])));
             break;
         }
         case addRoomEnum:
-        {
-            addRoom(std::stoi(command[1]),command[2], std::stoi(command[3]));
+        {      
+            addRoom(std::stoi(getValFromCommand(command[1])),getValFromCommand(command[2]), std::stoi(getValFromCommand(command[3])));
             break;
         }
         case deleteRoomEnum:
         {
-            deleteRoom(std::stoi(command[1]));
+            deleteRoom(std::stoi(getValFromCommand(command[1])));
             break;
         }
         case changeRoomEnum:
         {
-            changeRoom(std::stoi(command[0]), command[1], std::stoi(command[2]));
+            changeRoom(std::stoi(getValFromCommand(command[1])), getValFromCommand(command[2]), std::stoi(getValFromCommand(command[3])));
             break;
         }
         case changeCountryEnum:
         {
-            changeAddressCountry(command[1]);
+            changeAddressCountry(getValFromCommand(command[1]));
             break;
         }
         case changeCityEnum:
         {
-            changeAddressCity(command[1]);
+            changeAddressCity(getValFromCommand(command[1]));
             break;
         }
         case changeStreetEnum:
         {
-            changeAddressStreet(command[1]);
+            changeAddressStreet(getValFromCommand(command[1]));
             break;
         }
         case changeNrEnum:
         {
-            changeAddressNr(std::stoi(command[1]));
+            changeAddressNr(std::stoi(getValFromCommand(command[1])));
             break;
         }
     }
