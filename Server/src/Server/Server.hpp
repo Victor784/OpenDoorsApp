@@ -4,15 +4,15 @@
 #include <vector>
 #include "../Connection/IConnection.hpp"
 #include "../../utils/utils.hpp"
-#include "../../lib/sqlite3/sqlite3.h"
-
+#include "../DataBase/DataBase.hpp"
 
 class Server{
     private:
         IConnection& connection;
+        DataBase database;
     public:
-        Server(IConnection& conn) 
-        : connection(conn){}
+        Server(IConnection& conn, DataBase db) 
+        : connection(conn) , database(db){}
         IConnection& getConnection() { return connection;}
         void run();
         void process (std::string message);

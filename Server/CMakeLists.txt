@@ -13,6 +13,8 @@ add_executable(Server
     src/Logger/logger.cpp
     src/Connection/WSConnection.hpp
     src/Connection/WSConnection.cpp
+    src/DataBase/DataBase.hpp
+    src/DataBase/DataBase.cpp
     src/main.cpp
     )
 
