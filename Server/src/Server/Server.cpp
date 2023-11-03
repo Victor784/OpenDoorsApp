@@ -12,6 +12,7 @@ void Server::run()
     connection.createSocket();
     connection.bindSocket();
     connection.listenOnSocket();
+
     while(true)
     {
         std::string message = connection.acceptNewClientSocketAndRecieve();
