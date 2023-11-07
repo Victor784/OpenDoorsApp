@@ -171,3 +171,8 @@ std::string WSConnection::acceptNewClientSocketAndRecieve()
 }
 }
 
+void WSConnection::sendResponse(std::string reply)
+{
+    //TODO: implement this method, and implement a way to receive the reply in Client
+}
+

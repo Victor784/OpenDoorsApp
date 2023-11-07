@@ -82,3 +82,22 @@ DataBase::~DataBase()
          
         return SQLITE_OK; 
     }
+
+
+        void DataBase::switchStateForEntrance(unsigned int id){}
+        int DataBase::addEntrance(int roomId, int type, int position){return {};}
+        void DataBase::deleteEntrance(int entranceId){}
+        void DataBase::changeEntrance(int entranceId, int newType, int newPosition){}
+        void DataBase::addRoom(int id,std::string name, int level){}
+        void DataBase::changeRoom(int roomId, std::string newName, int newLevel){}
+        void DataBase::deleteRoom(int roomId){}
+        void DataBase::changeAddressCountry(std::string newCountryName){}
+        void DataBase::changeAddressCity(std::string newCityName){}
+        void DataBase::changeAddressStreet(std::string newStreetName){}
+        void DataBase::changeAddressNr(int newNr){}
+
+        std::string DataBase::getAddress(){return {};}
+        int DataBase::getNrOfRooms(){return {};}
+        std::string DataBase::getRoomAtRow(int row){return {};}
+        int DataBase::getNrOfEntrances(){return {};}
+        std::string DataBase::getEntranceAtRow(int row){return {};}

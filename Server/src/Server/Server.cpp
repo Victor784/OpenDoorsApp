@@ -27,7 +27,14 @@ void Server::process(std::string message)
     if(trimmedMessage.size() != 0)
     {
         std::vector<std::string> command = decodeMessage(trimmedMessage);
+        std::cout << "\n{";
+        for(auto elem : command)
+        {
+            std::cout << elem << ";";
+        }
+        std::cout << "}\n";
         bool responseFromServer = executeCommand(command);
+        connection.sendResponse(reply);
     }
     
 }
@@ -163,6 +170,72 @@ void Server::switchStateForEntrance(unsigned int id)
 void Server::addEntrance(int roomId, EntranceType type, Position position)
 {
     std::cout << "[DEBUG] processing addEntrance() for room id : " << roomId << " type : " << toString(type) << " position : " << toString(position) << '\n' ;
+    int DBtype {0};
+    int DBPosition {0};
+    switch(type)
+    {
+        case EntranceType::Door:
+        {
+            DBtype = 1;
+            break;
+        }
+           
+        case EntranceType::RabatableDoor:
+        {
+            DBtype = 2;
+            break;
+        }
+            
+        case EntranceType::RabatableWindow:
+        {
+            DBtype = 3;
+            break;
+        }
+            
+        case EntranceType::Window:
+        {
+            DBtype = 4;
+            break;
+        }  
+        default:
+            DBtype = 0;
+    }
+    switch(position)
+    {
+        case Position::East:
+        {
+            DBPosition = 1;
+            break;
+        }
+           
+        case Position::North:
+        {
+            DBPosition = 2;
+            break;
+        }
+            
+        case Position::South:
+        {
+            DBPosition = 3;
+            break;
+        }
+            
+        case Position::West:
+        {
+            DBPosition = 4;
+            break;
+        }  
+        default:
+            DBtype = 0;
+    }
+    if(DBtype == 0 || DBPosition == 0)
+        reply = "Error when at Entrance type / position";
+
+    int ret = database.addEntrance(roomId, 1, 3);
+    if(ret == SQLITE_ERROR)
+        reply = "WCould not add entrance";
+    else if(ret == SQLITE_OK)
+        reply = "OK";    
 }
 
 void Server::deleteEntrance(int entranceId)

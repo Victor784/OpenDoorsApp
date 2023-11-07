@@ -16,4 +16,5 @@ class WSConnection : public IConnection{
         void bindSocket() override;
         void listenOnSocket() override;
         std::string acceptNewClientSocketAndRecieve() override;
+        void sendResponse(std::string reply);
 };

@@ -10,6 +10,7 @@ class Server{
     private:
         IConnection& connection;
         DataBase database;
+        std::string reply = "";
     public:
         Server(IConnection& conn, DataBase db) 
         : connection(conn) , database(db){}
@@ -33,5 +34,15 @@ class Server{
         void changeAddressCity(std::string newCityName);
         void changeAddressStreet(std::string newStreetName);
         void changeAddressNr(int newNr);
+        //Methods needed to populate the client repo at client start up
+        void getAddress();
+        //-------
+        void getNrOfRooms();
+        void getRoomAtRow(int row);
+        //-------
+        void getNrOfEntrances();
+        void getEntranceAtRow(int row);
+
+
         ~Server() = default;
 };
