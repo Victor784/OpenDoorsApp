@@ -34,7 +34,7 @@ void Server::process(std::string message)
         }
         std::cout << "}\n";
         bool responseFromServer = executeCommand(command);
-        connection.sendResponse(reply);
+        //connection.sendResponse(reply);
     }
     
 }

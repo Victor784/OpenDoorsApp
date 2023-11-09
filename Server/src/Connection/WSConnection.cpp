@@ -171,8 +171,10 @@ std::string WSConnection::acceptNewClientSocketAndRecieve()
 }
 }
 
-void WSConnection::sendResponse(std::string reply)
-{
+// void WSConnection::sendResponse(std::string reply)
+// {
     //TODO: implement this method, and implement a way to receive the reply in Client
-}
+    //NOT POSSIBLE at the momment as creating a new sendSocket from the Servers serverSocekt will break the recieving socket
+    //Comunication through another socket would be a good ideea , but since a refactor of the IPC method is due, this will be postponed
+// }
 
