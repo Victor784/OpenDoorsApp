@@ -15,8 +15,8 @@
 int main()
 {   
     WSConnection conn;
-    DataBase db;
-    Server server(conn , db);
+    //DataBase db;
+    Server server(conn);
     server.run();
     return 0;
 }

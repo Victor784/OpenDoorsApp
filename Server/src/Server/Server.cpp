@@ -231,9 +231,9 @@ void Server::addEntrance(int roomId, EntranceType type, Position position)
     if(DBtype == 0 || DBPosition == 0)
         reply = "Error when at Entrance type / position";
 
-    int ret = database.addEntrance(roomId, 1, 3);
+    int ret = database.addEntrance(roomId, DBtype, DBPosition);
     if(ret == SQLITE_ERROR)
-        reply = "WCould not add entrance";
+        reply = "Could not add entrance";
     else if(ret == SQLITE_OK)
         reply = "OK";    
 }
@@ -241,14 +241,91 @@ void Server::addEntrance(int roomId, EntranceType type, Position position)
 void Server::deleteEntrance(int entranceId)
 {
     std::cout << "[DEBUG] processing deleteEntrance() for entrance id : " << entranceId << '\n' ;
+    int ret = database.deleteEntrance(entranceId);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not delete entrance";
+    else if(ret == SQLITE_OK)
+        reply = "OK"; 
 }
 void Server::changeEntrance(int entranceId, EntranceType newType, Position newPosition)
 {
     std::cout << "[DEBUG] processing changeEntrance() for entrance id : " << entranceId << " type : " << toString(newType) << " position : " << toString(newPosition) << '\n' ;
+    int DBtype {0};
+    int DBPosition {0};
+    switch(newType)
+    {
+        case EntranceType::Door:
+        {
+            DBtype = 1;
+            break;
+        }
+           
+        case EntranceType::RabatableDoor:
+        {
+            DBtype = 2;
+            break;
+        }
+            
+        case EntranceType::RabatableWindow:
+        {
+            DBtype = 3;
+            break;
+        }
+            
+        case EntranceType::Window:
+        {
+            DBtype = 4;
+            break;
+        }  
+        default:
+            DBtype = 0;
+    }
+    switch(newPosition)
+    {
+        case Position::East:
+        {
+            DBPosition = 1;
+            break;
+        }
+           
+        case Position::North:
+        {
+            DBPosition = 2;
+            break;
+        }
+            
+        case Position::South:
+        {
+            DBPosition = 3;
+            break;
+        }
+            
+        case Position::West:
+        {
+            DBPosition = 4;
+            break;
+        }  
+        default:
+            DBtype = 0;
+    }
+    if(DBtype == 0 || DBPosition == 0)
+        reply = "Error when at Entrance type / position";
+
+    int ret = database.changeEntrance(entranceId, DBtype, DBPosition);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not add entrance";
+    else if(ret == SQLITE_OK)
+        reply = "OK";    
+
 }
 void Server::addRoom(int id,std::string name, int level)
 {
     std::cout << "[DEBUG] processing addRoom() with room id : " << id << " name : " << name << " level : " << level << '\n' ;
+    int ret = database.addRoom(id, name, level);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not delete entrance";
+    else if(ret == SQLITE_OK)
+        reply = "OK"; 
 }
 void Server::changeRoom(int roomId, std::string newName, int newLevel)
 {

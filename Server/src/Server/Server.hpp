@@ -12,8 +12,8 @@ class Server{
         DataBase database;
         std::string reply = "";
     public:
-        Server(IConnection& conn, DataBase db) 
-        : connection(conn) , database(db){}
+        Server(IConnection& conn) 
+        : connection(conn){ DataBase db;  database = db;}
         IConnection& getConnection() { return connection;}
         void run();
         void process (std::string message);

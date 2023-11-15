@@ -18,9 +18,9 @@ class DataBase
         //Server operations
         void switchStateForEntrance(unsigned int id);
         int addEntrance(int entranceId, int type, int position);
-        void deleteEntrance(int entranceId);
-        void changeEntrance(int entranceId, int newType, int newPosition);
-        void addRoom(int id,std::string name, int level);
+        int deleteEntrance(int entranceId);
+        int changeEntrance(int entranceId, int newType, int newPosition);
+        int addRoom(int id,std::string name, int level);
         void changeRoom(int roomId, std::string newName, int newLevel);
         void deleteRoom(int roomId);
         void changeAddressCountry(std::string newCountryName);
