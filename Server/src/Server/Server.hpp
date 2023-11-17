@@ -13,7 +13,7 @@ class Server{
         std::string reply = "";
     public:
         Server(IConnection& conn) 
-        : connection(conn){ DataBase db;  database = db;}
+        : connection(conn){ /*DataBase db;  database = db;*/}
         IConnection& getConnection() { return connection;}
         void run();
         void process (std::string message);

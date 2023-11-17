@@ -13,7 +13,7 @@ DataBase::DataBase()
         } else 
         {
             fprintf(stderr, "Opened database successfully\n");
-            int ret = createTables();
+            int ret = createTables();;
             if(ret != SQLITE_OK)
             {
                 fprintf(stderr, "Some issues while creating the DB tables\n");
@@ -46,31 +46,17 @@ DataBase::~DataBase()
             "subNr INTEGER,"
             "floor INTEGER"
             ");";
-
+        
         int result1 = sqlite3_exec(db, createAddressTableSQL, 0, 0, 0);
         if (result1 != SQLITE_OK) {
             return SQLITE_ERROR;
             std::cout << "error at addressTableCreation \n";
         }
-        const char* createEntrancesTableSQL = "CREATE TABLE IF NOT EXISTS EntrancesTable ("
-            "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-            "roomId INTEGER,"
-            "type INTEGER,"
-            "position INTEGER,"
-            "status INTEGER"
-            ");";
-
-        int result3 = sqlite3_exec(db, createEntrancesTableSQL, 0, 0, 0);
-        if (result3 != SQLITE_OK) {
-            return SQLITE_ERROR;
-            std::cout << "error at entranceTableCreation \n";
-        }
 
         const char* createRoomsTableSQL = "CREATE TABLE IF NOT EXISTS RoomsTable ("
-            "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "ID INTEGER PRIMARY KEY ,"
             "name TEXT,"
-            "floor INTEGER,"
-            "nrOfEntrances INTEGER"
+            "floor INTEGER"
             ");";
 
         int result2 = sqlite3_exec(db, createRoomsTableSQL, 0, 0, 0);
@@ -78,7 +64,16 @@ DataBase::~DataBase()
             std::cout << "error at roomsTableCreation \n";
             return SQLITE_ERROR;
         }
-         
+
+        const char* createEntrancesTableSQL = "CREATE TABLE IF NOT EXISTS EntrancesTable (ID INTEGER PRIMARY KEY,roomId INTEGER,type INTEGER,position INTEGER,status INTEGER,CONSTRAINT RoomsTable FOREIGN KEY(roomId) REFERENCES RoomsTable(ID));";
+        int result3 = sqlite3_exec(db, createEntrancesTableSQL, 0, 0, 0);
+        if (result3 != SQLITE_OK) {
+           std::cout << "error at entranceTableCreation \n";
+           std::cout << result3 << '\n';
+           std::cout << sqlite3_errmsg(db)<< '\n';
+            return SQLITE_ERROR;
+            
+        }
         return SQLITE_OK; 
     }
 
@@ -160,11 +155,11 @@ DataBase::~DataBase()
         {
             sqlite3_stmt* stmt;
             const char* messageError;
-            std::string sql ("INSERT INTO RoomsTable (id,name,floor,NrOfEntrances) VALUES ("
+            std::string sql ("INSERT INTO RoomsTable (id,name,floor) VALUES ("
             + std::to_string(id)   + ","
             + "\'" + name  + "\'" + ","
-            + std::to_string(level) + ","
-            +           "0"                 + ");" // default state of Entrances is closed which coresponds to 0
+            + std::to_string(level)
+            + ");" 
            );
             sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
             int result3 = sqlite3_step( stmt );
