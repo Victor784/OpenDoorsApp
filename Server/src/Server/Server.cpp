@@ -6,6 +6,46 @@
 #include "../../utils/utils.hpp"
 
 
+void Server::debugServer ()
+{
+     /*====================DEBUG=========================*/
+        std::cout <<  "Chooose a function to test : \n";
+        std::cout << "1. getNrOfRooms()\n";
+        std::cout << "2. getNrOfEntrances()\n";
+        std::cout << "3. getAddress()\n";
+        std::cout << "4. getRoomAtRow(int row)\n";
+        std::cout << "5. getEntranceAtRow(int row)";
+        int option, row;
+        std::cin >> option;
+        switch (option) 
+        {
+            case 1:
+                getNrOfRooms();
+                break;
+            case 2:
+                getNrOfEntrances();
+                break;
+            case 3:
+                getAddress();
+                break;
+            case 4:
+            {
+                std::cin >> row;
+                getRoomAtRow(row);
+                break;
+            }
+            case 5:
+            {
+                std::cin >> row;
+                getEntranceAtRow(row);
+                break;
+            }
+                
+
+        }
+    /*====================DEBUG=========================*/
+}
+
 
 void Server::run()
 {
@@ -18,6 +58,7 @@ void Server::run()
         std::string message = connection.acceptNewClientSocketAndRecieve();
         process(message);
         //result from process will be a bool, send OK to client if return = true and NOT OK else
+        debugServer();
     }
 }
 
@@ -235,7 +276,10 @@ void Server::addEntrance(int roomId, EntranceType type, Position position)
     if(ret == SQLITE_ERROR)
         reply = "Could not add entrance";
     else if(ret == SQLITE_OK)
-        reply = "OK";    
+        reply = "OK";  
+    std::cout << "[DEBUG] getNrOfRooms -------\n" ;
+    getNrOfEntrances(); 
+    std::cout << "[DEBUG] ----------------------\n";  
 }
 
 void Server::deleteEntrance(int entranceId)
@@ -325,7 +369,10 @@ void Server::addRoom(int id,std::string name, int level)
     if(ret == SQLITE_ERROR)
         reply = "Could not add room";
     else if(ret == SQLITE_OK)
-        reply = "OK"; 
+        reply = "OK";
+    std::cout << "[DEBUG] getNrOfRooms -------\n" ;
+    getNrOfRooms(); 
+    std::cout << "[DEBUG] ----------------------\n";
 }
 void Server::changeRoom(int roomId, std::string newName, int newLevel)
 {
@@ -349,16 +396,75 @@ void Server::deleteRoom(int roomId)
 void Server::changeAddressCountry(std::string newCountryName)
 {
      std::cout << "[DEBUG] processing changeAddressCountry() with newCountryName : " << newCountryName << '\n';
+     int ret = database.changeAddressCountry(newCountryName);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not change address country";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
 }
 void Server::changeAddressCity(std::string newCityName)
 {
     std::cout << "[DEBUG] processing changeAddressCity() with newCityName : " << newCityName << '\n';
+    int ret = database.changeAddressCity(newCityName);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not change address city";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
 }
 void Server::changeAddressStreet(std::string newStreetName)
 {
     std::cout << "[DEBUG] processing changeAddressStreet() with newStreetName : " << newStreetName << '\n';
+    int ret = database.changeAddressStreet(newStreetName);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not change address city";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
 }
 void Server::changeAddressNr(int newNr)
 {
     std::cout << "[DEBUG] processing changeAddressNr() with newNr : " << newNr << '\n';
+    int ret = database.changeAddressNr(newNr);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not change address city";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
+}
+
+void Server::getNrOfRooms()
+{
+    std::cout << "[DEBUG] processing getNrOfRooms() \n";
+    int ret = database.getNrOfRooms();
+    if(ret == SQLITE_ERROR)
+        reply = "Some error at getnrOfRooms";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
+    std::cout << "Need to do something with this val : " << ret << '\n';
+}
+
+void Server::getNrOfEntrances()
+{
+    std::cout << "[DEBUG] processing getNrOfEntrances() \n";
+    int ret = database.getNrOfEntrances();
+    if(ret == SQLITE_ERROR)
+        reply = "Some error at getNrOfEntrances";
+    else if(ret == SQLITE_OK)
+        reply = "OK";
+    std::cout << "Need to do something with this val : " << ret << '\n';
+}
+
+void Server::getAddress()
+{
+    reply = database.getAddress();
+    std::cout << "reply : | " << reply << " |;\n";
+}
+
+void Server::getRoomAtRow(int id)
+{
+    reply = database.getRoomAtRow(id);
+    std::cout << "reply : | " << reply << " |;\n";
+}
+void Server::getEntranceAtRow(int id)
+{
+   reply = database.getEntranceAtRow(id);
+   std::cout << "reply : | " << reply << " |;\n";
 }

@@ -38,11 +38,12 @@ class Server{
         void getAddress();
         //-------
         void getNrOfRooms();
-        void getRoomAtRow(int row);
+        void getRoomAtRow(int id);
         //-------
         void getNrOfEntrances();
-        void getEntranceAtRow(int row);
+        void getEntranceAtRow(int id);
 
+        void debugServer();
 
         ~Server() = default;
 };

@@ -23,10 +23,10 @@ class DataBase
         int addRoom(int id,std::string name, int level);
         int changeRoom(int roomId, std::string newName, int newLevel);
         int deleteRoom(int roomId);
-        void changeAddressCountry(std::string newCountryName);
-        void changeAddressCity(std::string newCityName);
-        void changeAddressStreet(std::string newStreetName);
-        void changeAddressNr(int newNr);
+        int changeAddressCountry(std::string newCountryName);
+        int  changeAddressCity(std::string newCityName);
+        int changeAddressStreet(std::string newStreetName);
+        int changeAddressNr(int newNr);
 
         //Client needed operations (getting the data from the DB to the Client at startup)
 
@@ -37,5 +37,8 @@ class DataBase
         //-------
         int getNrOfEntrances();
         std::string getEntranceAtRow(int row);
+
+        private:
+            std::string getDataFromRow(const std::string& tableName, int rowID);
 
 };

@@ -1,4 +1,5 @@
 #include "DataBase.hpp"
+#include <iterator>
 #include <string>
 
 DataBase::DataBase()
@@ -42,17 +43,22 @@ DataBase::~DataBase()
             "country TEXT,"
             "city TEXT,"
             "street TEXT,"
-            "nr INTEGER,"
-            "subNr INTEGER,"
-            "floor INTEGER"
+            "nr INTEGER"
             ");";
         
         int result1 = sqlite3_exec(db, createAddressTableSQL, 0, 0, 0);
         if (result1 != SQLITE_OK) {
-            return SQLITE_ERROR;
             std::cout << "error at addressTableCreation \n";
+            return SQLITE_ERROR;
         }
 
+        const char* insertAddressRow = "INSERT INTO AddressTable (ID, country, city, street, nr) VALUES (1,'NOT SET','NOT SET','NOT SET',0);";
+        int res = sqlite3_exec(db, insertAddressRow, 0, 0, 0);
+        //THIS statement will fail when the server starts 2nd time or any time after that, as inserting the same values (the same id) twice is not allowed as it is a primary key
+        // if (res != SQLITE_OK) {
+        //     std::cout << "error at Insertion of row in addressTableCreation \n";
+        //     return SQLITE_ERROR;
+        // }
         const char* createRoomsTableSQL = "CREATE TABLE IF NOT EXISTS RoomsTable ("
             "ID INTEGER PRIMARY KEY ,"
             "name TEXT,"
@@ -75,6 +81,7 @@ DataBase::~DataBase()
             
         }
         return SQLITE_OK; 
+
     }
 
 
@@ -213,13 +220,186 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        void DataBase::changeAddressCountry(std::string newCountryName){}
-        void DataBase::changeAddressCity(std::string newCityName){}
-        void DataBase::changeAddressStreet(std::string newStreetName){}
-        void DataBase::changeAddressNr(int newNr){}
+        int DataBase::changeAddressCountry(std::string newCountryName)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"UPDATE AddressTable SET country = \'" + 
+            newCountryName  + "\'" + "WHERE ID = 1;"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for change address country : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE)  
+            {
+                std::cout << "error at change address country , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
+        int DataBase::changeAddressCity(std::string newCityName)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"UPDATE AddressTable SET city = \'" + 
+            newCityName  + "\'" + "WHERE ID = 1;"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for change address country : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE)  
+            {
+                std::cout << "error at change address country , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
+        int DataBase::changeAddressStreet(std::string newStreetName)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"UPDATE AddressTable SET street = \'" + 
+            newStreetName  + "\'" + "WHERE ID = 1;"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for change street country : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE)  
+            {
+                std::cout << "error at change address street , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
+        int DataBase::changeAddressNr(int newNr)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"UPDATE AddressTable SET nr = \'" + 
+            std::to_string(newNr)  + "\'" + "WHERE ID = 1;"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for change address nr : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE)  
+            {
+                std::cout << "error at change address nr , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
 
-        std::string DataBase::getAddress(){return {};}
-        int DataBase::getNrOfRooms(){return {};}
-        std::string DataBase::getRoomAtRow(int row){return {};}
-        int DataBase::getNrOfEntrances(){return {};}
-        std::string DataBase::getEntranceAtRow(int row){return {};}
+        
+        int DataBase::getNrOfRooms()
+        {
+            int rc;
+            sqlite3_stmt* stmt;
+            const char* query = "SELECT COUNT(1) FROM RoomsTable;";
+            rc = sqlite3_prepare_v2(db, query, -1, &stmt, nullptr);
+
+            if (rc != SQLITE_OK) {
+                std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
+                sqlite3_close(db);
+                return SQLITE_ERROR;
+            }
+
+            // Execute the query
+            rc = sqlite3_step(stmt);
+
+            if (rc == SQLITE_ROW) {
+                // Get the count value as a 64-bit integer
+                int count = static_cast<int>(sqlite3_column_int64(stmt, 0));
+                // Use the count value as needed
+                return count;
+            } else {
+                std::cerr << "Error executing query: " << sqlite3_errmsg(db) << std::endl;
+                return SQLITE_ERROR;
+            }
+        }
+        
+        int DataBase::getNrOfEntrances()
+        {
+            int rc;
+            sqlite3_stmt* stmt;
+            const char* query = "SELECT COUNT(1) FROM EntrancesTable;";
+            rc = sqlite3_prepare_v2(db, query, -1, &stmt, nullptr);
+
+            if (rc != SQLITE_OK) {
+                std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
+                sqlite3_close(db);
+                return SQLITE_ERROR;
+            }
+
+            // Execute the query
+            rc = sqlite3_step(stmt);
+
+            if (rc == SQLITE_ROW) {
+                // Get the count value as a 64-bit integer
+                int count = static_cast<int>(sqlite3_column_int64(stmt, 0));
+                // Use the count value as needed
+                return count;
+            } else {
+                std::cerr << "Error executing query: " << sqlite3_errmsg(db) << std::endl;
+                return SQLITE_ERROR;
+            }
+        }
+        std::string DataBase::getAddress()
+        {
+            return getDataFromRow("AddressTable", 1);
+        }
+        std::string DataBase::getEntranceAtRow(int row)
+        {
+            return getDataFromRow("EntrancesTable", row);
+        }
+        std::string DataBase::getRoomAtRow(int row)
+        {
+            return getDataFromRow("RoomsTable", row);
+        }
+        
+        std::string DataBase::getDataFromRow(const std::string& tableName, int rowID) {
+            int rc;
+            // Construct the SELECT query with a WHERE clause
+            std::string query = "SELECT * FROM " + tableName + " WHERE ID = " + std::to_string(rowID) + ";";
+
+            sqlite3_stmt* stmt;
+            rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
+
+            if (rc != SQLITE_OK) {
+                std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
+                sqlite3_close(db);
+                return "";
+            }
+
+            // Execute the query
+            rc = sqlite3_step(stmt);
+
+            if (rc == SQLITE_ROW) {
+                // Get data from the columns in the result set
+                std::string result;
+
+                for (int i = 0; i < sqlite3_column_count(stmt); ++i) {
+                    const char* columnName = sqlite3_column_name(stmt, i);
+                    const char* value = reinterpret_cast<const char*>(sqlite3_column_text(stmt, i));
+
+                    result += columnName + std::string(": ") + (value ? value : "NULL") + "\n";
+                }
+
+                sqlite3_finalize(stmt);
+                sqlite3_close(db);
+
+                return result;
+            } else {
+                std::cerr << "Error executing query: " << sqlite3_errmsg(db) << std::endl;
+                sqlite3_finalize(stmt);
+                sqlite3_close(db);
+                return "";
+            }
+}
