@@ -73,6 +73,7 @@ void WSConnection::connect_()
 
 void WSConnection::write_(std::string message)
 {
+    std::cout << "WSConnection.write() : message " << message << '\n';
     Logger& logger = Logger::getInstance();
     if(clientScoket== SOCKET_ERROR)
     {

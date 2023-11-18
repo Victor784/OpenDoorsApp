@@ -115,6 +115,7 @@ DataBase::~DataBase()
         int DataBase::deleteEntrance(int entranceId)
         {   
             //TODO : You need to get the roomId from the row that you need to delete so you can decrease the NROfEntrances 
+            //This is no longer needed as rooms no longer hold the nr of Entrances they have
             sqlite3_stmt* stmt;
             const char* messageError;
             std::string sql {"DELETE FROM EntrancesTable WHERE ID = " + std::to_string(entranceId) + ";"};
@@ -174,8 +175,44 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        void DataBase::changeRoom(int roomId, std::string newName, int newLevel){}
-        void DataBase::deleteRoom(int roomId){}
+        int DataBase::changeRoom(int roomId, std::string newName, int newLevel)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"UPDATE RoomsTable SET name = \'"
+            + newName + "\'"+ ", floor = " + std::to_string(newLevel) +
+            " WHERE ID = " + std::to_string(roomId) +  ";"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for change room : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE)  
+            {
+                std::cout << "error at change room , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
+        int DataBase::deleteRoom(int roomId)
+        {
+            sqlite3_stmt* stmt;
+            const char* messageError;
+            std::string sql {"DELETE FROM RoomsTable WHERE ID = " + std::to_string(roomId) + ";"};
+            sqlite3_prepare_v2( db, sql.c_str(), -1, &stmt,  &messageError );//preparing the statement
+            int result3 = sqlite3_step( stmt );
+        
+            std::cout << "[DEBUG] : query for delete entrance : " << sql << '\n';
+            if (result3 != SQLITE_OK && result3!= SQLITE_DONE) 
+            {
+                std::cout << "error at delete entrance , error : " << result3 << '\n'; 
+                std::cout <<'|'<< messageError <<'|'<< '\n';  
+                return SQLITE_ERROR;
+                
+            }
+            return SQLITE_OK;
+        }
         void DataBase::changeAddressCountry(std::string newCountryName){}
         void DataBase::changeAddressCity(std::string newCityName){}
         void DataBase::changeAddressStreet(std::string newStreetName){}

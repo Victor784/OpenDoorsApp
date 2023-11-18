@@ -323,17 +323,28 @@ void Server::addRoom(int id,std::string name, int level)
     std::cout << "[DEBUG] processing addRoom() with room id : " << id << " name : " << name << " level : " << level << '\n' ;
     int ret = database.addRoom(id, name, level);
     if(ret == SQLITE_ERROR)
-        reply = "Could not delete entrance";
+        reply = "Could not add room";
     else if(ret == SQLITE_OK)
         reply = "OK"; 
 }
 void Server::changeRoom(int roomId, std::string newName, int newLevel)
 {
     std::cout << "[DEBUG] processing changeRoom() with room id : " << roomId << " name : " << newName << " level : " << newLevel << '\n' ;
+    int ret = database.changeRoom(roomId, newName, newLevel);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not change room";
+    else if(ret == SQLITE_OK)
+        reply = "OK"; 
+    
 }
 void Server::deleteRoom(int roomId)
 {
     std::cout << "[DEBUG] processing deleteRoom() with room id : " << roomId << '\n';
+    int ret = database.deleteRoom(roomId);
+    if(ret == SQLITE_ERROR)
+        reply = "Could not delete room";
+    else if(ret == SQLITE_OK)
+        reply = "OK"; 
 }
 void Server::changeAddressCountry(std::string newCountryName)
 {

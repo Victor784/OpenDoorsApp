@@ -21,8 +21,8 @@ class DataBase
         int deleteEntrance(int entranceId);
         int changeEntrance(int entranceId, int newType, int newPosition);
         int addRoom(int id,std::string name, int level);
-        void changeRoom(int roomId, std::string newName, int newLevel);
-        void deleteRoom(int roomId);
+        int changeRoom(int roomId, std::string newName, int newLevel);
+        int deleteRoom(int roomId);
         void changeAddressCountry(std::string newCountryName);
         void changeAddressCity(std::string newCityName);
         void changeAddressStreet(std::string newStreetName);
