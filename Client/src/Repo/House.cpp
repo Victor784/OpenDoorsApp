@@ -8,20 +8,20 @@ House::House()
     id = ++houseIdGenerator;
 }
 
-House::House(Address addresVal)
+House::House(const Address &addresVal)
 {
     id = ++houseIdGenerator;
     addres = addresVal;
 }
 
-House::House(Address addresVal, std::vector<Room>& roomsVect)
+House::House(const Address &addresVal, const std::vector<Room>& roomsVect)
 {
     id = ++houseIdGenerator;
     addres = addresVal;
     rooms = roomsVect;
 }
 
-House::House(std::vector<Room>& roomsVect)
+House::House(const std::vector<Room>& roomsVect)
 {
     id = ++houseIdGenerator;
     rooms = roomsVect;
@@ -47,12 +47,12 @@ void House::setAddress(Address newAddress)
     addres = newAddress;
 }
 
-void House::setRooms(std::vector<Room> newRoomVect)
+void House::setRooms(const std::vector<Room> &newRoomVect)
 {
     rooms = newRoomVect;
 }
 
-void House::addRoom(Room newRoom)
+void House::addRoom(const Room &newRoom)
 {
     rooms.push_back(newRoom);
 }
@@ -101,7 +101,7 @@ void House::changeRoom(unsigned int roomId, std::string newName, std::string new
         std::cout << "Cannot find room with the provided Id\n";
 }
 
-void House::addEntrance(unsigned int roomId, Entrance newEntrance)
+void House::addEntrance(unsigned int roomId, const Entrance &newEntrance)
 {
     for(auto& room : rooms)
     {
@@ -112,7 +112,7 @@ void House::addEntrance(unsigned int roomId, Entrance newEntrance)
     }
 }
 
-void House::changeEntrance(unsigned int entranceId , EntranceType newType, Position newPosition)
+void House::changeEntrance(unsigned int entranceId , const EntranceType &newType, const Position &newPosition)
 {
     for(auto& room : rooms)
     {
@@ -193,15 +193,15 @@ std::string House::toString()
     return outPut;
 }
 
-void House::setAddressCountry(std::string newCountry)
+void House::setAddressCountry(const std::string &newCountry)
 {
     addres.coutry = newCountry;
 }
-void House::setAddressCity(std::string newCity)
+void House::setAddressCity(const std::string &newCity)
 {
     addres.city = newCity;
 }
-void House::setAddressStreet(std::string NewStreetName)
+void House::setAddressStreet(const std::string &NewStreetName)
 {
     addres.streetName = NewStreetName;
 }

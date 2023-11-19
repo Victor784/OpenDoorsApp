@@ -9,6 +9,6 @@ class IConnection{
         virtual void connect_() = 0;
         virtual void disconnect_() = 0;
         virtual std::string read_() = 0;
-        virtual void write_(std::string message) = 0;
+        virtual void write_(const std::string &message) = 0;
 }; 
 }

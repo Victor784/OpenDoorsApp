@@ -55,7 +55,7 @@ class Connection : public IConnection{
         void connect_() override;
         void disconnect_() override ;
         std::string read_() override;
-        void write_(std::string message) override;
+        void write_(const std::string &message) override;
         
     
 };

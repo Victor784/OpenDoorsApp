@@ -62,7 +62,7 @@ void Server::run()
     }
 }
 
-void Server::process(std::string message)
+void Server::process(const std::string &message)
 {
     std::string trimmedMessage = trim(message);
     if(trimmedMessage.size() != 0)
@@ -80,7 +80,7 @@ void Server::process(std::string message)
     
 }
 
-std::string Server::trim(std::string message)
+std::string Server::trim(const std::string &message)
 {
     std::string trimmedMessage;
     for(int i = 0; i < message.length(); i++)
@@ -102,7 +102,7 @@ std::string Server::trim(std::string message)
     return trimmedMessage;
 }
 
-std::vector<std::string> Server::decodeMessage(std::string message)
+std::vector<std::string> Server::decodeMessage(const std::string &message)
 {
     std::string token;
     std::vector<std::string> decodedMessage;
@@ -113,7 +113,7 @@ std::vector<std::string> Server::decodeMessage(std::string message)
     return decodedMessage;
 }
 
-std::string Server::getValFromCommand(std::string partOfCommand)
+std::string Server::getValFromCommand(const std::string &partOfCommand)
 {
     bool flag = false;
     std::string ret;
@@ -139,7 +139,7 @@ std::string Server::getValFromCommand(std::string partOfCommand)
     return ret;
 }
 
-bool Server::executeCommand(std::vector<std::string> command)
+bool Server::executeCommand(const std::vector<std::string> &command)
 {
    
     const auto cmd = Test::convertStringToCommand(command[0]);
@@ -208,7 +208,7 @@ void Server::switchStateForEntrance(unsigned int id)
 {
     std::cout << "[DEBUG] processing switchStateForEntrance() for entrance id : " << id << '\n';
 }
-void Server::addEntrance(int roomId, EntranceType type, Position position)
+void Server::addEntrance(int roomId, const EntranceType &type, const Position &position)
 {
     std::cout << "[DEBUG] processing addEntrance() for room id : " << roomId << " type : " << toString(type) << " position : " << toString(position) << '\n' ;
     int DBtype {0};
@@ -291,7 +291,7 @@ void Server::deleteEntrance(int entranceId)
     else if(ret == SQLITE_OK)
         reply = "OK"; 
 }
-void Server::changeEntrance(int entranceId, EntranceType newType, Position newPosition)
+void Server::changeEntrance(int entranceId, const EntranceType &newType, const Position &newPosition)
 {
     std::cout << "[DEBUG] processing changeEntrance() for entrance id : " << entranceId << " type : " << toString(newType) << " position : " << toString(newPosition) << '\n' ;
     int DBtype {0};
@@ -362,7 +362,7 @@ void Server::changeEntrance(int entranceId, EntranceType newType, Position newPo
         reply = "OK";    
 
 }
-void Server::addRoom(int id,std::string name, int level)
+void Server::addRoom(int id,const std::string &name, int level)
 {
     std::cout << "[DEBUG] processing addRoom() with room id : " << id << " name : " << name << " level : " << level << '\n' ;
     int ret = database.addRoom(id, name, level);
@@ -374,7 +374,7 @@ void Server::addRoom(int id,std::string name, int level)
     getNrOfRooms(); 
     std::cout << "[DEBUG] ----------------------\n";
 }
-void Server::changeRoom(int roomId, std::string newName, int newLevel)
+void Server::changeRoom(int roomId, const std::string &newName, int newLevel)
 {
     std::cout << "[DEBUG] processing changeRoom() with room id : " << roomId << " name : " << newName << " level : " << newLevel << '\n' ;
     int ret = database.changeRoom(roomId, newName, newLevel);
@@ -393,7 +393,7 @@ void Server::deleteRoom(int roomId)
     else if(ret == SQLITE_OK)
         reply = "OK"; 
 }
-void Server::changeAddressCountry(std::string newCountryName)
+void Server::changeAddressCountry(const std::string &newCountryName)
 {
      std::cout << "[DEBUG] processing changeAddressCountry() with newCountryName : " << newCountryName << '\n';
      int ret = database.changeAddressCountry(newCountryName);
@@ -402,7 +402,7 @@ void Server::changeAddressCountry(std::string newCountryName)
     else if(ret == SQLITE_OK)
         reply = "OK";
 }
-void Server::changeAddressCity(std::string newCityName)
+void Server::changeAddressCity(const std::string &newCityName)
 {
     std::cout << "[DEBUG] processing changeAddressCity() with newCityName : " << newCityName << '\n';
     int ret = database.changeAddressCity(newCityName);
@@ -411,7 +411,7 @@ void Server::changeAddressCity(std::string newCityName)
     else if(ret == SQLITE_OK)
         reply = "OK";
 }
-void Server::changeAddressStreet(std::string newStreetName)
+void Server::changeAddressStreet(const std::string &newStreetName)
 {
     std::cout << "[DEBUG] processing changeAddressStreet() with newStreetName : " << newStreetName << '\n';
     int ret = database.changeAddressStreet(newStreetName);

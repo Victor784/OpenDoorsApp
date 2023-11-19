@@ -23,7 +23,7 @@ class UI
         House* house;
     public:
         UI(){};
-        UI(IPanel* initPanel, std::string command, House* repoVal) : 
+        UI(IPanel* initPanel, const std::string &command, House* repoVal) : 
         currentPanel(initPanel) , cmd(command) , house(repoVal){}
         void run();
 };

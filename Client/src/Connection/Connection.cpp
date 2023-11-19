@@ -2,7 +2,7 @@
 
 namespace connection
 {
-void Connection::write_(std::string message)
+void Connection::write_(const std::string &message)
         {
             std::cout << "connection : " << message << '\n'; 
             std::ofstream outPipe(pipeName.getOutgoingPipe());

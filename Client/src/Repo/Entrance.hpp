@@ -37,9 +37,9 @@ class Entrance
         Position getPosition() const;
         Status getStatus() const;
 
-        void setType(EntranceType newType);
-        void setPosition(Position newPosition);
-        void setStatus(Status newStatus); // initially used for everything , now used only for when a room is changed
+        void setType(const EntranceType &newType);
+        void setPosition(const Position &newPosition);
+        void setStatus(const Status &newStatus); // initially used for everything , now used only for when a room is changed
         void switchStatus(); // using for switching between the statuses of an entrance
         
         friend std::ostream& operator<<(std::ostream& os, const Entrance& en);
@@ -54,7 +54,7 @@ class Entrance
 };
 
 namespace utils{
-std::string toString(EntranceType type);
-std::string toString(Position position);
-std::string toString(Status status);
+std::string toString(const EntranceType &type);
+std::string toString(const Position &position);
+std::string toString(const Status &status);
 }

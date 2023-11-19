@@ -15,7 +15,7 @@ class PanelForListAllEntrances : public IPanel
 
     public:
         PanelForListAllEntrances() = delete;
-        PanelForListAllEntrances(std::string name , std::string outPut, bool finalPanel, std::string command, House* repoPtrVal) : 
+        PanelForListAllEntrances(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* repoPtrVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command) , repoPtr(std::move(repoPtrVal)){}
         // Panel(std::string name , std::vector<Panel*> vect) :
         // nameOfPanel(name) , availablePanels(vect) {}
@@ -24,7 +24,7 @@ class PanelForListAllEntrances : public IPanel
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForListAllEntrances() = default;
         House * getRepoPtr() {return repoPtr;};
 };
@@ -41,14 +41,14 @@ class PanelForOptionDisplay : public IPanel
         std::string cmd;
     public:
         PanelForOptionDisplay() = delete;
-        PanelForOptionDisplay(std::string name , std::string outPut, bool finalPanel, std::string command) : 
+        PanelForOptionDisplay(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command) {}
         IPanel* exec() override;
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForOptionDisplay() = default;
 };
 
@@ -65,14 +65,14 @@ class PanelForChangeHouseLayout : public IPanel
         House* house;
     public:
         PanelForChangeHouseLayout() = delete;
-        PanelForChangeHouseLayout(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeHouseLayout(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeHouseLayout() = default;
 };
 
@@ -88,14 +88,14 @@ class PanelForChangeHouseDetails : public IPanel
         House* house;
     public:
         PanelForChangeHouseDetails() = delete;
-        PanelForChangeHouseDetails(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeHouseDetails(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeHouseDetails() = default;
     private:
         std::string inOutHouseDetails(int option);
@@ -112,14 +112,14 @@ class PanelForChangeRooms : public IPanel
         House* house;
     public:
         PanelForChangeRooms() = delete;
-        PanelForChangeRooms(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeRooms(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeRooms() = default;
 };  
 
@@ -135,14 +135,14 @@ class PanelForAddRoom : public IPanel
         House* house;
     public:
         PanelForAddRoom() = delete;
-        PanelForAddRoom(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForAddRoom(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForAddRoom() = default;
 };  
 
@@ -157,14 +157,14 @@ class PanelForChangeRoom : public IPanel
         House* house;
     public:
         PanelForChangeRoom() = delete;
-        PanelForChangeRoom(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeRoom(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeRoom() = default;
 };  
 
@@ -180,14 +180,14 @@ class PanelForDeleteRoom : public IPanel
         House* house;
     public:
         PanelForDeleteRoom() = delete;
-        PanelForDeleteRoom(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForDeleteRoom(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForDeleteRoom() = default;
 };  
 
@@ -203,14 +203,14 @@ class PanelForChangeEntrances : public IPanel
         House* house;
     public:
         PanelForChangeEntrances() = delete;
-        PanelForChangeEntrances(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeEntrances(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeEntrances() = default;
 };  
 
@@ -227,14 +227,14 @@ class PanelForAddEntrance : public IPanel
         House* house;
     public:
         PanelForAddEntrance() = delete;
-        PanelForAddEntrance(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForAddEntrance(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForAddEntrance() = default;
 };  
 
@@ -249,14 +249,14 @@ class PanelForDeleteEntrance : public IPanel
         House* house;
     public:
         PanelForDeleteEntrance() = delete;
-        PanelForDeleteEntrance(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForDeleteEntrance(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForDeleteEntrance() = default;
 };  
 
@@ -271,13 +271,13 @@ class PanelForChangeEntrance : public IPanel
         House* house;
     public:
         PanelForChangeEntrance() = delete;
-        PanelForChangeEntrance(std::string name , std::string outPut, bool finalPanel, std::string command, House* houseVal) : 
+        PanelForChangeEntrance(const std::string &name , const std::string &outPut, bool finalPanel, const std::string &command, House* houseVal) : 
         nameOfPanel(name), display(outPut), isFinalPanelV(finalPanel), cmd(command), house(std::move(houseVal)) {}
         IPanel* exec() override ; 
         bool isFinalPanel() override {return isFinalPanelV;}
         std::string getNameOfPanel() override {return nameOfPanel;}
         std::vector<IPanel*> getAvailablePanels() override {return availablePanels;}
         std::string getCmd() override {return cmd;}
-        void setAvailablePanels(std::vector<IPanel*> vect) override { availablePanels = vect;};
+        void setAvailablePanels(const std::vector<IPanel*> &vect) override { availablePanels = vect;};
         ~PanelForChangeEntrance() = default;
 }; 

@@ -71,7 +71,7 @@ void WSConnection::connect_()
     }
 }
 
-void WSConnection::write_(std::string message)
+void WSConnection::write_(const std::string &message)
 {
     std::cout << "WSConnection.write() : message " << message << '\n';
     Logger& logger = Logger::getInstance();

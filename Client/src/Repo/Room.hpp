@@ -7,8 +7,8 @@ class Room
 {
     public:
         Room() = delete;
-        Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance>& entranceVect);
-        Room(std::string nameVal, unsigned int levelVal);
+        Room(const std::string &nameVal, unsigned int levelVal, const std::vector<Entrance>& entranceVect);
+        Room(const std::string &nameVal, unsigned int levelVal);
         ~Room() = default;
 
         unsigned int getId()const ;
@@ -16,13 +16,13 @@ class Room
         int getLevel()const ;
         std::vector<Entrance> getEntrances() const;
 
-        void setName(std::string nameVal);
+        void setName(const std::string &nameVal);
         void setLevel(unsigned int levelVal);
-        void setEntrances(std::vector<Entrance> entranceVect);
+        void setEntrances(const std::vector<Entrance> &entranceVect);
 
-        void addEntrance(Entrance &newEntrance);
+        void addEntrance(const Entrance &newEntrance);
         void removeEntrance(unsigned int entranceId);
-        void changeEntrance(unsigned int id, EntranceType newType, Position newPos );
+        void changeEntrance(unsigned int id, const EntranceType &newType, const Position &newPos );
 
         void changeEntranceStatus(int entranceId);
 

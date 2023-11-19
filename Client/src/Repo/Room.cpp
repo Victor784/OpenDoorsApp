@@ -2,7 +2,7 @@
 
 unsigned int Room::roomIdGenerator = 0;
 
-Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance>& entranceVal)
+Room::Room(const std::string &nameVal, unsigned int levelVal, const std::vector<Entrance>& entranceVal)
 {
     id = ++roomIdGenerator;
     name = nameVal;
@@ -10,7 +10,7 @@ Room::Room(std::string nameVal, unsigned int levelVal, std::vector<Entrance>& en
     entrances = entranceVal;  
 }
 
-Room::Room(std::string nameVal, unsigned int levelVal)
+Room::Room(const std::string &nameVal, unsigned int levelVal)
 {
     id = ++roomIdGenerator;
     name = nameVal;
@@ -38,7 +38,7 @@ std::vector<Entrance> Room::getEntrances() const
     return entrances;
 }
 
-void Room::setName(std::string nameVal)
+void Room::setName(const std::string &nameVal)
 {
     name = nameVal;
 }
@@ -48,12 +48,12 @@ void Room::setLevel(unsigned int levelVal)
     level = levelVal;
 }
 
-void Room::setEntrances(std::vector<Entrance> entranceVect)
+void Room::setEntrances(const std::vector<Entrance> &entranceVect)
 {
     entrances = entranceVect;
 }
 
-void Room::addEntrance(Entrance& newEntrance)
+void Room::addEntrance(const Entrance& newEntrance)
 {
     entrances.push_back(newEntrance);
 }
@@ -76,7 +76,7 @@ void Room::removeEntrance(unsigned int entranceId)
     }
 }
 
-void Room::changeEntrance(unsigned int id, EntranceType newType, Position newPos )
+void Room::changeEntrance(unsigned int id, const EntranceType &newType, const Position &newPos )
 {
     for (int i = 0; i< entrances.size(); i++)
     {

@@ -13,5 +13,5 @@ class IPanel
         virtual bool isFinalPanel() = 0;
         virtual std::vector<IPanel*> getAvailablePanels() = 0;
         virtual std::string getCmd() = 0;
-        virtual void setAvailablePanels(std::vector<IPanel*> vect) = 0;
+        virtual void setAvailablePanels(const std::vector<IPanel*> &vect) = 0;
 };

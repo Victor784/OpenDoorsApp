@@ -20,12 +20,12 @@ class DataBase
         int addEntrance(int entranceId, int type, int position);
         int deleteEntrance(int entranceId);
         int changeEntrance(int entranceId, int newType, int newPosition);
-        int addRoom(int id,std::string name, int level);
-        int changeRoom(int roomId, std::string newName, int newLevel);
+        int addRoom(int id,const std::string &name, int level);
+        int changeRoom(int roomId, const std::string &newName, int newLevel);
         int deleteRoom(int roomId);
-        int changeAddressCountry(std::string newCountryName);
-        int  changeAddressCity(std::string newCityName);
-        int changeAddressStreet(std::string newStreetName);
+        int changeAddressCountry(const std::string &newCountryName);
+        int  changeAddressCity(const std::string &newCityName);
+        int changeAddressStreet(const std::string &newStreetName);
         int changeAddressNr(int newNr);
 
         //Client needed operations (getting the data from the DB to the Client at startup)

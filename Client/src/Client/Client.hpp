@@ -20,7 +20,7 @@ class Client{
         House& getHouse(){
             return  house;}
         void run();
-        void sendCmd(std::string cmd)
+        void sendCmd(const std::string &cmd)
         {
         // std::cout << "From sendCmd of Client : " << cmd << '\n';
         connection.connect_();

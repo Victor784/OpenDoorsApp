@@ -16,23 +16,23 @@ class Server{
         : connection(conn){ /*DataBase db;  database = db;*/}
         IConnection& getConnection() { return connection;}
         void run();
-        void process (std::string message);
-        std::string trim(std::string message);
-        std::vector<std::string> decodeMessage(std::string message);
-        bool executeCommand(std::vector<std::string> command);
+        void process (const std::string &message);
+        std::string trim(const std::string &message);
+        std::vector<std::string> decodeMessage(const std::string &message);
+        bool executeCommand(const std::vector<std::string> &command);
         void createDataBase();
-        std::string getValFromCommand(std::string partOfCommand);
+        std::string getValFromCommand(const std::string &partOfCommand);
         //DB elem control
         void switchStateForEntrance(unsigned int id);
-        void addEntrance(int roomId, EntranceType type, Position position);
+        void addEntrance(int roomId, const EntranceType &type, const Position &position);
         void deleteEntrance(int entranceId);
-        void changeEntrance(int entranceId, EntranceType newType, Position newPosition);
-        void addRoom(int id,std::string name, int level);
-        void changeRoom(int roomId, std::string newName, int newLevel);
+        void changeEntrance(int entranceId, const EntranceType &newType, const Position &newPosition);
+        void addRoom(int id,const std::string &name, int level);
+        void changeRoom(int roomId, const std::string &newName, int newLevel);
         void deleteRoom(int roomId);
-        void changeAddressCountry(std::string newCountryName);
-        void changeAddressCity(std::string newCityName);
-        void changeAddressStreet(std::string newStreetName);
+        void changeAddressCountry(const std::string &newCountryName);
+        void changeAddressCity(const std::string &newCityName);
+        void changeAddressStreet(const std::string &newStreetName);
         void changeAddressNr(int newNr);
         //Methods needed to populate the client repo at client start up
         void getAddress();

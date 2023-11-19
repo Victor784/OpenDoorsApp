@@ -33,17 +33,17 @@ Status Entrance::getStatus() const
     return status;
 }
 
-void Entrance::setType(EntranceType newType)
+void Entrance::setType(const EntranceType &newType)
 {
     type = newType;
 }
         
-void Entrance::setPosition(Position newPosition)
+void Entrance::setPosition(const Position &newPosition)
 {
     position = newPosition;
 }
 
-void Entrance::setStatus(Status newStatus)
+void Entrance::setStatus(const Status &newStatus)
 {
     status = newStatus;
 }
@@ -85,7 +85,7 @@ void Entrance::switchStatus()
 
 // TODO: template function toString would be a good idea
 
-std::string utils::toString(EntranceType type)
+std::string utils::toString(const EntranceType &type)
 {
     switch (type) {
         case EntranceType::Door:
@@ -101,7 +101,7 @@ std::string utils::toString(EntranceType type)
     }
 }
 
-std::string utils::toString(Position position)
+std::string utils::toString(const Position &position)
 {
     switch (position) {
         case Position::East:
@@ -116,7 +116,7 @@ std::string utils::toString(Position position)
             return "";
     }
 }
-std::string utils::toString(Status status)
+std::string utils::toString(const Status &status)
 {
     switch (status) {
         case Status::Closed:

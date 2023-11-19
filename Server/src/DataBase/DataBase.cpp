@@ -159,7 +159,7 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        int DataBase::addRoom(int id,std::string name, int level)
+        int DataBase::addRoom(int id,const std::string &name, int level)
         {
             sqlite3_stmt* stmt;
             const char* messageError;
@@ -182,7 +182,7 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        int DataBase::changeRoom(int roomId, std::string newName, int newLevel)
+        int DataBase::changeRoom(int roomId, const std::string &newName, int newLevel)
         {
             sqlite3_stmt* stmt;
             const char* messageError;
@@ -220,7 +220,7 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        int DataBase::changeAddressCountry(std::string newCountryName)
+        int DataBase::changeAddressCountry(const std::string &newCountryName)
         {
             sqlite3_stmt* stmt;
             const char* messageError;
@@ -239,7 +239,7 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        int DataBase::changeAddressCity(std::string newCityName)
+        int DataBase::changeAddressCity(const std::string &newCityName)
         {
             sqlite3_stmt* stmt;
             const char* messageError;
@@ -258,7 +258,7 @@ DataBase::~DataBase()
             }
             return SQLITE_OK;
         }
-        int DataBase::changeAddressStreet(std::string newStreetName)
+        int DataBase::changeAddressStreet(const std::string &newStreetName)
         {
             sqlite3_stmt* stmt;
             const char* messageError;
