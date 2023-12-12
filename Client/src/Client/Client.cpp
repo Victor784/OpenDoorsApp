@@ -54,29 +54,28 @@ void Client::run()
 
     PanelForOptionDisplay PanelInit("PanelInit", " 1.Change house layout\n 2.Check entrances \n 0.Exit\n", false, "");
 
-    PanelForChangeHouseLayout PanelChangeHouseLayout("House layout", " 1.House details\n 2.Rooms\n 3.Entrances\n 0.Back\n", false, "", &house);
+    PanelForChangeHouseLayout PanelChangeHouseLayout(&house);
+    PanelForListAllEntrances PanelListAllEntrances(&house);
 
-    PanelForListAllEntrances PanelListAllEntrances("All entrances" , " 0.Back\n" , false , "" , &house);
+    PanelForChangeHouseDetails PanelForChangeHouseDetails(&house );
 
-    PanelForChangeHouseDetails PanelForChangeHouseDetails("House details" , " 1.Change country\n 2.Change city\n 3.Change street\n 4.Change nr\n 0.Back\n", false, "" , &house );
-
-    PanelForChangeRooms PanelForChangeRooms("Rooms", " 1.Add room\n 2.Delete room\n 3.Change room\n 0.Back\n", false, "", &house);
+    PanelForChangeRooms PanelForChangeRooms(&house);
     
-    PanelForAddRoom PanelForAddRoom("Add room", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForAddRoom PanelForAddRoom(&house);
 
-    PanelForChangeRoom PanelForChangeRoom("Change room",  " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForChangeRoom PanelForChangeRoom(&house);
 
-    PanelForDeleteRoom PanelForDeleteRoom("Delete room", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForDeleteRoom PanelForDeleteRoom(&house);
 
     
-    PanelForChangeEntrances PanelForChangeEntrances("Entrances", " 1.Add entrance\n 2.Delete entrance\n 3.Change entrance\n 0.Back\n", false, "", &house);
+    PanelForChangeEntrances PanelForChangeEntrances(&house);
     
-    PanelForAddEntrance PanelForAddEntrance("Add entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForAddEntrance PanelForAddEntrance( &house);
 
 
-    PanelForDeleteEntrance PanelForDeleteEntrance("Delete entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForDeleteEntrance PanelForDeleteEntrance(&house);
 
-    PanelForChangeEntrance PanelForChangeEntrance("Change entrance", " 1.Confirm\n 2.Abort\n", true, "" , &house);
+    PanelForChangeEntrance PanelForChangeEntrance(&house);
 
     IPanel* panelChangeEntrancePtr = &PanelForChangeEntrance;
     IPanel* panelDeleteEntrancePtr = &PanelForDeleteEntrance;
