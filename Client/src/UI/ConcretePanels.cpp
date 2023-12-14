@@ -1,6 +1,8 @@
 #include "ConcretePanels.hpp"
 #include <memory>
 #include <string>
+#include <typeinfo>
+
 
 IPanel* PanelForOptionDisplay::exec()
         {
@@ -9,6 +11,7 @@ IPanel* PanelForOptionDisplay::exec()
             std::cout << display;
             int option;
             std::cin >> option;
+            std::cout << "option is : " << option << '\n';
             if(option >= availablePanels.size()) //a lso check if the option is of type int
             {
                 std::cout << "Invalid input..\n";
@@ -102,7 +105,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                         {
                             std::cout << "\n Enter new country: ";
                             std::string newName;
-                            std::cin >> newName; //TOOD validate input
+                            std::cin >> newName;
                             house->setAddressCountry(newName);
                             cmd = "{change-country, country:" + newName + "}";
                             break;
@@ -111,7 +114,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                         {
                             std::cout << "\n Enter new city: ";
                             std::string newName;
-                            std::cin >> newName; //TOOD validate input
+                            std::cin >> newName;
                             house->setAddressCity(newName);
                             cmd = "{change-city, city:" + newName + "}";
                             break;
@@ -120,7 +123,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                         {
                             std::cout << "\n Enter new street name: ";
                             std::string newName;
-                            std::cin >> newName; //TOOD validate input
+                            std::cin >> newName;
                             house->setAddressStreet(newName);
                             cmd = "{change-street, street:" + newName + "}";
                             break;
@@ -129,7 +132,7 @@ IPanel* PanelForChangeHouseDetails::exec()
                         {
                         std::cout << "\n Enter new nr: ";
                             unsigned int nr;
-                            std::cin >> nr; //TOOD validate input
+                            std::cin >> nr;
                             house->setAddressNr(nr); 
                             cmd = "{change-nr, nr:" + std::to_string(nr) + "}";
                             break;

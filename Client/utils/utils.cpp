@@ -21,4 +21,4 @@ namespace logging {
             return msgbuf;
      }
 
-}
+} // namespace logging

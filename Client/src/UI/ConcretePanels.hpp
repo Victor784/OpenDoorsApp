@@ -2,6 +2,7 @@
 
 #include "BasePanel.hpp"
 #include "../Repo/House.hpp"
+#include "../../utils/utils.hpp"
 
 class PanelForListAllEntrances : public BasePanel
 {
